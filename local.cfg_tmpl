@@ -3,8 +3,8 @@
 [buildout]
 # Choose which environment you are going to use
 extends = 
-#    https://raw.github.com/starzel/Testproject/master/buildout/developx3/linkto/develop.cfg
-#    https://raw.github.com/starzel/Testproject/master/buildout/developx3/linkto/production.cfg
+#    https://raw.github.com/starzel/buildout/master/linkto/develop.cfg
+#    https://raw.github.com/starzel/buildout/master/linkto/production.cfg
 
 # If you want you can have you eggs picked
 #allow-picked-versions = true
@@ -16,6 +16,9 @@ eggs =
 #    Products.DocFinderTab
 #    Products.PrintingMailHost
 #    plone.reload
+#    collective.backtowork
+#    collective.logbook
+#    raven
 # Allow debugging restricted code  
 #    Products.Ienablesettrace
 # Post-mortem debugging
@@ -24,10 +27,6 @@ eggs =
 #    iw.debug
 # Information where a deadlock occurs
 #    z3c.deadlockdebugger
-# Automatic reloads (needs additional config in [instance])
-#    sauna.reload
-# Needed for sauna.reload unter OSX
-#    watchdog
 
 zcml =
 #    iw.debug
@@ -54,8 +53,7 @@ vardir = /home/starzel/var/${buildout:site}
 logdir = ${buildout:vardir}/log
 
 [instance]
-# only needed if sauna.reload is used
-#zope-conf-additional = %import sauna.reload
+
 
 [ports]
 # Adjust the ports if necessary (e.g. if you run multiple sites without modifying /etc/hosts)
