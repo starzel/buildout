@@ -26,7 +26,7 @@ acl purge {
 sub vcl_recv {
     set req.grace = 120s;
     set req.backend = default;
-    
+
     if (req.request == "PURGE") {
         if (!client.ip ~ purge) {
                 error 405 "Not allowed.";
@@ -40,7 +40,7 @@ sub vcl_recv {
     }
     call normalize_accept_encoding;
     call annotate_request;
-    return(lookup);
+    # return(lookup);
 }
 
 sub vcl_fetch {
