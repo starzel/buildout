@@ -29,3 +29,10 @@ pip-log.txt
 # local config
 local.cfg
 secret.cfg
+
+# Codeintel
+.codeintel
+etc/
+include/
+lib/
+local/
