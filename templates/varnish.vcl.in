@@ -24,6 +24,23 @@ acl purge {
 }
 
 sub vcl_recv {
+    if (req.http.Cookie) {
+        # (logged in user, status message - NO session storage or language cookie)
+        set req.http.Cookie = ";" req.http.Cookie;
+        # strip leading space for cookienames
+        set req.http.Cookie = regsuball(req.http.Cookie, "; +", ";");
+        # add leading space for the following cookies
+        set req.http.Cookie = regsuball(req.http.Cookie, ";(I18N_LANGUAGE|statusmessages|__ac|_ZopeId|__cp)=", "; \1=");
+        # Remove all cookies not found by previous regex
+        set req.http.Cookie = regsuball(req.http.Cookie, ";[^ ][^;]*", "");
+        # Remove empty strings
+        set req.http.Cookie = regsuball(req.http.Cookie, "^[; ]+|[; ]+$", "");
+
+        if (req.http.Cookie == "") {
+            remove req.http.Cookie;
+        }
+    }
+
     set req.grace = 120s;
     set req.backend = default;
 
@@ -40,7 +57,6 @@ sub vcl_recv {
     }
     call normalize_accept_encoding;
     call annotate_request;
-    # return(lookup);
 }
 
 sub vcl_fetch {
