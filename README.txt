@@ -20,3 +20,5 @@ local.cfg and secret.cfg must not be versioned.
 buildout.cfg contains the project settings, equal for each environment. 
 
 It feels weird that buildout.cfg loads local.cfg, but this avoids some weird extends behavior of buildout.
+
+The configuration assumes that nginx is configured on production only and also contains configuration for the test environment
