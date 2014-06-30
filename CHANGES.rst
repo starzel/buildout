@@ -19,3 +19,14 @@ Changes
 - fix zcml- and egg-inheritance [pbauer]
 - add empty pinned- and floating-versions to overwrite the hosted files [pbauer]
 
+3.1 (unreleased)
+================
+- Add Version information for the files that get copied [do3cc]
+
+Migration
+---------
+- Add the version file to the project.
+- Ensure that starzel_buildout gets checked out, so that you can
+  compare stock config with customized site-config
+- The sentry settings are only in parts commented out. Double check
+  that your configuration is complete.
