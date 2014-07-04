@@ -19,3 +19,7 @@ Changes
 - fix zcml- and egg-inheritance [pbauer]
 - add empty pinned- and floating-versions to overwrite the hosted files [pbauer]
 
+3.1 (unreleased)
+================
+- No more auto-checkout*
+
