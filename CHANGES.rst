@@ -24,6 +24,12 @@ Changes
 - No more auto-checkout
 - Add Version information for the files that get copied [do3cc]
 
+3.2
+===
+- Add a jenkins bootstrap script. No more complex jenkins configs [do3cc]
+- Renamed test to jenkins [do3cc]
+- Added code-analysis to jenkins and develop. Update accordingly [do3cc]
+
 
 Migration
 ---------
