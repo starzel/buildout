@@ -1,0 +1,1 @@
+find src -name \*po -exec ./bin/podiff --vcs git ${i18nize-diff:repo} {} \;
