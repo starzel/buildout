@@ -1,14 +1,14 @@
 Usage
 *****
 
-This is a standard buildout of starzel.de. It extends to files on github shared by all projects of the same version of Plone like this:
+This is a standard Plone-buildout of the company `Starzel.de <http://www.starzel.de>`_. It extends to files on github shared by all projects that use the same version of Plone like this:
 
 .. code-block:: ini
 
     extends =
         https://raw.githubusercontent.com/starzel/buildout/4.3.3/linkto/base.cfg
 
-Features:
+Main features:
 
 * It allows to update a project simply by changing the version it extends.
 * It allows to update all projects of one version by changing remote files (very useful for HotFixes).
@@ -77,23 +77,140 @@ Symlink to the production-config:
 
     $ ln -s local_production.cfg local.cfg
 
-In ``local_production.cfg`` to select the parts you really need. Especially if you want to use haproxy, zeo or
-single zeo client.
+In ``local_production.cfg`` to select the parts you really need. A average project that uses haproxy, vanish and two zeoclients looks like this:
+
+.. code-block:: ini
+
+    parts +=
+        ${buildout:zeo-ha-parts}
+        ${buildout:nginx-parts}
+        ${buildout:varnish-parts}
+        ${buildout:supervisor-parts}
+        ${buildout:cron-parts}
+        backup
+        logrotate
+        precompiler
 
 Also modify ``templates/supervisord.conf`` to have supervisor manage the parts you want to use.
 
-``local.cfg`` and ``secret.cfg`` must **never** be versioned.
+
+Use for test-instances
+----------------------
+
+Create a copy of ``local_production.cfg`` called ``local_test.cfg`` and modify it according to your needs.
+
+.. warning::
+
+    It test runs on the same server as production:
+
+    In this case you need a different name for the project on test. Otherwise one will overwrite the database of the other. Because of this the name of the project must **not** be set in ``buildout.cfg`` but in the ``local_*.cfg``-files.
 
 Notes
 -----
 
-It feels weird that buildout.cfg loads local.cfg, but this avoids some weird extends behavior of buildout.
+``local.cfg`` and ``secret.cfg`` must **never** be versioned.
 
-The configuration assumes that nginx is configured on production only and also contains configuration for the test environment
+It feels weird that ``buildout.cfg`` loads ``local.cfg``, but this avoids some weird extends behavior of buildout.
 
-You can have different supervisor-configurations for test-servers by adding a file ``templates/supervisord-test.conf`` and referencing it in local_test.cfg:
+The configuration assumes that nginx is configured on production only.
+
+To have different supervisor-configurations for test-servers by adding a file ``templates/supervisord-test.conf`` and referencing it in local_test.cfg:
 
 .. code-block:: ini
 
     [supervisor-conf]
         input= ${buildout:directory}/templates/supervisord-test.conf
+
+Features
+--------
+
+Debugging and Development
++++++++++++++++++++++++++
+
+stacktrace
+    The part ``stacktrace-script`` adds a bash-script ``./bin/stack.sh`` that will print the current stacktrace to stdout. Useful to find out what Plone is doing when it's busy.
+
+code-analysis
+    This installs a pre-commit-hook that runs the codeanalysis-tests from ``plone.recipe.codeanalysis``.
+
+omelette
+    All eggs of your buildout will be symlinked to in ``parts/omelette``.
+
+codeintel
+    This part uses ``corneti.recipes.codeintel`` to prepare for codeintel-integration (useful for users of Sublime Text).
+
+checkversions
+    Run ``./bin/checkversions floating_versions_project.cfg`` to check if your pinned eggs are up-to-date.
+
+zopepy
+    Run ``./bin/zopepy`` to have a python-prompt with all eggs of your buildout in its python-path.
+
+i18n
+++++
+
+i18nize-diff
+    TODO
+
+i18nize-xxx
+    Modify the commented-out part ``i18nize-xxx`` to get a script that runs i18ndude fro an egg. Here is an example for the egg ``dynajet.site`` adding a script ``./bin/i18nize-site``.
+
+    .. code-block:: ini
+
+        [i18nize-site]
+        recipe = collective.recipe.template
+        input = ${buildout:directory}/i18nize.in
+        output = ${buildout:bin-directory}/i18nize-site
+        mode = 775
+        dollar = $
+        domain = dynajet.site
+        packagepath = ${buildout:directory}/src/dynajet.site/src/dynajet/site
+        languages = de en fr da sv ru
+
+
+Testing
++++++++
+
+Setup for jenkins
+    Configure jenkins to run the script ``./bootstrap_jenkins.sh``. This will configure and run the whole buildout.
+
+
+Deployment
+++++++++++
+
+nginx
+    TODO
+
+haproxy
+    If you cannot use chroot to run haproxy as a isolated user you need to modify ``templates/haproxy.cfg`` like this:
+
+    .. code-block::
+
+        global
+          maxconn 480
+          user ${haproxy-conf:user}
+          group ${haproxy-conf:group}
+          daemon
+          log 127.0.0.1 local2
+
+varnish
+    Up to Plone 4.3.3 we still use varnish 2. To use varnish 3 please modify your ``local_production.cfg`` like this:
+
+    .. code-block:: ini
+
+        [varnish]
+        varnish_version = 3
+
+        [varnish-config]
+        input = templates/varnish_3x.vcl.in
+
+    varnish 4: TODO. See https://github.com/plone/documentation/pull/115
+
+
+monitoring
+    Change the settings for ``maxram`` to have memmon restart an instance when it uses up to much memory.
+
+Sentry logging
+    Configure zeoclients to send tracebacks to Sentry in ``local_production.cfg`` by uncommenting it and adding a dsn. You also need to enable the egg ``raven``. Repeat for each zeoclient.
+
+solr
+    TODO
