@@ -27,9 +27,9 @@ Structure
 ``local.cfg``
     For each environment (development, test, production, jenkins) there is a separate ``local_*.cfg``-file. You create a *symlink*  called ``local.cfg`` to one of these files depending on your environment. Each of the files includes the ``base.cfg`` that is hosted on github like this:
 
-        .. code-block:: ini
+    .. code-block:: ini
 
-            extends = https://raw.githubusercontent.com/starzel/buildout/4.3.3/linkto/base.cfg
+        extends = https://raw.githubusercontent.com/starzel/buildout/4.3.3/linkto/base.cfg
 
     This example refers to the tag 4.3.3 of this buildout that uses Plone 4.3.3. To use a different Plone-version simply change that to point to a differnt tag.
 
