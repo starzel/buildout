@@ -1,22 +1,49 @@
+====================
+The Starzel Buildout
+====================
+
+This is a standard Plone-buildout of the company `Starzel.de <http://www.starzel.de>`_.
+
 .. contents::
 
-Usage
-*****
 
-This is a standard Plone-buildout of the company `Starzel.de <http://www.starzel.de>`_. It extends to files on github shared by all projects that use the same version of Plone like this:
+Main features
+-------------
 
-.. code-block:: ini
-
-    extends =
-        https://raw.githubusercontent.com/starzel/buildout/4.3.3/linkto/base.cfg
-
-Main features:
-
+* It extends to config- and version-files on github shared by all projects that use the same version of Plone.
 * It allows to update a project simply by changing the version it extends.
 * It allows to update all projects of one version by changing remote files (very useful for HotFixes).
 * It is minimal work to setup a new project.
 * It has presets for development, testing, staging and production.
 * It has all the nice development-helpers we use.
+
+
+Structure
+---------
+
+``buildout.cfg``
+    This contains the project settings (name, addons, checkouts etc.).
+
+``local.cfg``
+    For each environment (development, test, production, jenkins) there is a separate ``local_*.cfg``-file. You create a *symlink*  called ``local.cfg`` to one of these files depending on your environment. Each of the files includes the ``base.cfg`` that is hosted on github like this:
+
+        .. code-block:: ini
+
+            extends = https://raw.githubusercontent.com/starzel/buildout/4.3.3/linkto/base.cfg
+
+    This example refers to the tag 4.3.3 of this buildout that uses Plone 4.3.3. To use a different Plone-version simply change that to point to a differnt tag.
+
+``base.cfg``
+    This remote file conatains most of the commonly used logic used for prodcution. It also includes two version-files that are also hosted on github:
+
+    * `pinned_versions.cfg <https://raw.githubusercontent.com/starzel/buildout/4.3.3/linkto/pinned_versions.cfg>`_: Pinns the Plone-version using http://dist.plone.org/release/4.3.3/versions.cfg
+    * `floating_versions.cfg <https://raw.githubusercontent.com/starzel/buildout/4.3.3/linkto/floating_versions.cfg>`_: Pinns all commonly used addons of this buildout.
+
+``pinned_versions_project.cfg``
+    TODO
+
+``floating_versions_project.cfg``
+    TODO
 
 
 Setting up a new project
@@ -107,21 +134,6 @@ Create a copy of ``local_production.cfg`` called ``local_test.cfg`` and modify i
 
     In this case you need a different name for the project on test. Otherwise one will overwrite the database of the other. Because of this the name of the project must **not** be set in ``buildout.cfg`` but in the ``local_*.cfg``-files.
 
-Notes
------
-
-``local.cfg`` and ``secret.cfg`` must **never** be versioned.
-
-It feels weird that ``buildout.cfg`` loads ``local.cfg``, but this avoids some weird extends behavior of buildout.
-
-The configuration assumes that nginx is configured on production only.
-
-To have different supervisor-configurations for test-servers by adding a file ``templates/supervisord-test.conf`` and referencing it in local_test.cfg:
-
-.. code-block:: ini
-
-    [supervisor-conf]
-        input= ${buildout:directory}/templates/supervisord-test.conf
 
 Features
 --------
@@ -216,3 +228,21 @@ Sentry logging
 
 solr
     TODO
+
+
+Notes
+-----
+
+``local.cfg`` and ``secret.cfg`` must **never** be versioned.
+
+It feels weird that ``buildout.cfg`` loads ``local.cfg``, but this avoids some weird extends behavior of buildout.
+
+The configuration assumes that nginx is configured on production only.
+
+To have different supervisor-configurations for test-servers by adding a file ``templates/supervisord-test.conf`` and referencing it in local_test.cfg:
+
+.. code-block:: ini
+
+    [supervisor-conf]
+        input= ${buildout:directory}/templates/supervisord-test.conf
+
