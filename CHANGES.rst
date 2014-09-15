@@ -29,7 +29,9 @@ Changes
 - Add a jenkins bootstrap script. No more complex jenkins configs [do3cc]
 - Renamed test to jenkins [do3cc]
 - Added code-analysis to jenkins and develop. Update accordingly [do3cc]
-
+- Add optional config for varnish 3.x [pbauer]
+- Fix language-setting not being used (also backported to 4.3.3.x) [pbauer]
+- Add documentation [pbauer]
 
 Migration
 ---------

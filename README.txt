@@ -162,6 +162,9 @@ zopepy
 i18n
 ++++
 
+Restrict loaded languages
+    By default only german ('de') is loaded on startup. In your ``buildout.cfg`` you can override the loaded languages using ``language = de en fr``. This setting also affects the languages used in the ``i18nize-xxx`` part. (see http://maurits.vanrees.org/weblog/archive/2010/10/i18n-plone-4#restrict-the-loaded-languages)
+
 i18nize-diff
     TODO
 
@@ -178,7 +181,7 @@ i18nize-xxx
         dollar = $
         domain = dynajet.site
         packagepath = ${buildout:directory}/src/dynajet.site/src/dynajet/site
-        languages = de en fr da sv ru
+        languages = ${buildout:languages}
 
 
 Testing
