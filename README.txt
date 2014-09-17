@@ -25,7 +25,7 @@ Structure
     This contains the project settings (name, addons, checkouts etc.).
 
 ``local.cfg``
-    For each environment (development, test, production, jenkins) there is a separate ``local_*.cfg``-file. You create a *symlink*  called ``local.cfg`` to one of these files depending on your environment. Each of the files includes the ``base.cfg`` that is hosted on github like this:
+    For each environment (development, production, jenkins/test) there is a separate ``local_*.cfg``-file. You create a *symlink*  called ``local.cfg`` to one of these files depending on your environment. Each of the files includes the remote ``base.cfg`` that is hosted on github like this:
 
     .. code-block:: ini
 
@@ -40,14 +40,14 @@ Structure
     * `floating_versions.cfg <https://raw.githubusercontent.com/starzel/buildout/4.3.3/linkto/floating_versions.cfg>`_: Pinns all commonly used addons of this buildout.
 
 ``pinned_versions_project.cfg``
-    TODO
+    Here you pinn versions to overwrite or extend the hosted ``pinned_versions.cfg``. These eggs are usually pinned for a reason and are usually not safe to be upgraded.
 
 ``floating_versions_project.cfg``
-    TODO
+    Here you overwrite and extend the hosted ``floating_versions.cfg``. These eggs should usually be safe to be upgraded. ``./bin/checkversions floating_versions_project.cfg`` will check pypi if there are newer releases for your pinned eggs.
 
 
-Setting up a new project
-------------------------
+Quickstart
+----------
 
 .. code-block:: bash
 
@@ -55,7 +55,6 @@ Setting up a new project
     $ cd SOME_PROJECT
 
 You do not need the linkto-directory since its files are used via links to github.
-
 
 .. code-block:: bash
 
@@ -92,9 +91,19 @@ Build Plone
 Configuring a project
 ---------------------
 
-``buildout.cfg`` contains the project settings, equal for each environment.
+``buildout.cfg`` contains the general project settings. Here you configure the name of the project, the eggs, source-checkouts and languages Plone will use.
 
-Here you configure the name of the project, the eggs and checkouts Plone will use.
+
+Use in development
+------------------
+
+Symlink to the development-config:
+
+.. code-block:: bash
+
+    $ ln -s local_develop.cfg local.cfg
+
+The development-setup will build a simple instance with some useful tools (see below). The setup assumes that zeo, varnish, haproxy and nginx are only configured on production.
 
 
 Use in production
@@ -130,7 +139,7 @@ Create a copy of ``local_production.cfg`` called ``local_test.cfg`` and modify i
 
 .. warning::
 
-    It test runs on the same server as production:
+    If test runs on the same server as production:
 
     In this case you need a different name for the project on test. Otherwise one will overwrite the database of the other. Because of this the name of the project must **not** be set in ``buildout.cfg`` but in the ``local_*.cfg``-files.
 
@@ -236,11 +245,10 @@ solr
 Notes
 -----
 
-``local.cfg`` and ``secret.cfg`` must **never** be versioned.
+``local.cfg`` and ``secret.cfg`` must **never** be versioned. The file ``.gitignore`` in this buildout already prevent this.
 
-It feels weird that ``buildout.cfg`` loads ``local.cfg``, but this avoids some weird extends behavior of buildout.
+It might feels weird that ``buildout.cfg`` loads ``local.cfg``, but this avoids some weird behavior of buildouts extends-feature.
 
-The configuration assumes that nginx is configured on production only.
 
 To have different supervisor-configurations for test-servers by adding a file ``templates/supervisord-test.conf`` and referencing it in local_test.cfg:
 
