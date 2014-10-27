@@ -33,6 +33,10 @@ Changes
 - Fix language-setting not being used (also backported to 4.3.3.x) [pbauer]
 - Add documentation [pbauer]
 
+3.2.1
+=====
+- Bugfix in jenkins test script. Update local_jenkins.cfg [do3cc]
+
 Migration
 ---------
 - Add the version file to the project.
