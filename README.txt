@@ -29,15 +29,15 @@ Structure
 
     .. code-block:: ini
 
-        extends = https://raw.githubusercontent.com/starzel/buildout/4.3.3/linkto/base.cfg
+        extends = https://raw.githubusercontent.com/starzel/buildout/4.3.4/linkto/base.cfg
 
-    This example refers to the tag 4.3.3 of this buildout that uses Plone 4.3.3. To use a different Plone-version simply change that to point to a differnt tag.
+    This example refers to the tag 4.3.4 of this buildout that uses Plone 4.3.4. To use a different Plone-version simply change that to point to a different tag.
 
 ``base.cfg``
     This remote file conatains most of the commonly used logic used for prodcution. It also includes two version-files that are also hosted on github:
 
-    * `pinned_versions.cfg <https://raw.githubusercontent.com/starzel/buildout/4.3.3/linkto/pinned_versions.cfg>`_: Pinns the Plone-version using http://dist.plone.org/release/4.3.3/versions.cfg
-    * `floating_versions.cfg <https://raw.githubusercontent.com/starzel/buildout/4.3.3/linkto/floating_versions.cfg>`_: Pinns all commonly used addons of this buildout.
+    * `pinned_versions.cfg <https://raw.githubusercontent.com/starzel/buildout/4.3.4/linkto/pinned_versions.cfg>`_: Pinns the Plone-version using http://dist.plone.org/release/4.3.4/versions.cfg
+    * `floating_versions.cfg <https://raw.githubusercontent.com/starzel/buildout/4.3.4/linkto/floating_versions.cfg>`_: Pinns all commonly used addons of this buildout.
 
 ``pinned_versions_project.cfg``
     Here you pinn versions to overwrite or extend the hosted ``pinned_versions.cfg``. These eggs are usually pinned for a reason and are usually not safe to be upgraded.
@@ -229,7 +229,7 @@ varnish
         [varnish-config]
         input = templates/varnish_3x.vcl.in
 
-    varnish 4: TODO. See https://github.com/plone/documentation/pull/115
+    varnish 4: TODO. See https://github.com/plone/documentation/blob/master/manage/deploying/caching/varnish4.rst
 
 
 monitoring

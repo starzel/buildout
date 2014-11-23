@@ -37,6 +37,12 @@ Changes
 =====
 - Bugfix in jenkins test script. Update local_jenkins.cfg [do3cc]
 
+3.2.2
+=====
+- Bugfixes for local_jenkins [pbauer]
+- Use Plone 4.3.4 [pbauer]
+
+
 Migration
 ---------
 - Add the version file to the project.
