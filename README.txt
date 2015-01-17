@@ -29,21 +29,42 @@ Structure
 
     .. code-block:: ini
 
-        extends = https://raw.githubusercontent.com/starzel/buildout/4.3.4/linkto/base.cfg
+        extends = https://raw.githubusercontent.com/starzel/buildout/5.0a3/linkto/base.cfg
 
-    This example refers to the tag 4.3.4 of this buildout that uses Plone 4.3.4. To use a different Plone-version simply change that to point to a different tag.
+    This example refers to the tag 5.0a3 of this buildout that uses Plone 5.0a3 To use a different Plone-version simply change that to point to a different tag.
 
 ``base.cfg``
     This remote file conatains most of the commonly used logic used for prodcution. It also includes two version-files that are also hosted on github:
 
-    * `pinned_versions.cfg <https://raw.githubusercontent.com/starzel/buildout/4.3.4/linkto/pinned_versions.cfg>`_: Pinns the Plone-version using http://dist.plone.org/release/4.3.4/versions.cfg
-    * `floating_versions.cfg <https://raw.githubusercontent.com/starzel/buildout/4.3.4/linkto/floating_versions.cfg>`_: Pinns all commonly used addons of this buildout.
+    * `pinned_versions.cfg <https://raw.githubusercontent.com/starzel/buildout/5.0a3/linkto/pinned_versions.cfg>`_: Pinns the Plone-version using http://dist.plone.org/release/5.0a3/versions.cfg
+    * `floating_versions.cfg <https://raw.githubusercontent.com/starzel/buildout/5.0a3/linkto/floating_versions.cfg>`_: Pinns all commonly used addons of this buildout.
 
 ``pinned_versions_project.cfg``
     Here you pinn versions to overwrite or extend the hosted ``pinned_versions.cfg``. These eggs are usually pinned for a reason and are usually not safe to be upgraded.
 
 ``floating_versions_project.cfg``
     Here you overwrite and extend the hosted ``floating_versions.cfg``. These eggs should usually be safe to be upgraded. ``./bin/checkversions floating_versions_project.cfg`` will check pypi if there are newer releases for your pinned eggs.
+
+
+Versions
+--------
+
+We support the following version of Plone:
+
+- `5.0a3 <https://raw.githubusercontent.com/starzel/buildout/5.0a3/linkto/base.cfg>`_
+- `4.3.4 <https://raw.githubusercontent.com/starzel/buildout/4.3.4/linkto/base.cfg>`_
+- `4.3.3 <https://raw.githubusercontent.com/starzel/buildout/4.3.3/linkto/base.cfg>`_
+- `4.3.2 <https://raw.githubusercontent.com/starzel/buildout/4.3.2/linkto/base.cfg>`_
+- `4.3.1 <https://raw.githubusercontent.com/starzel/buildout/4.3.1/linkto/base.cfg>`_
+- `4.3 <https://raw.githubusercontent.com/starzel/buildout/4.3/linkto/base.cfg>`_
+- `4.3rc1 <https://raw.githubusercontent.com/starzel/buildout/4.3rc1/linkto/base.cfg>`_
+- `4.2.5 <https://raw.githubusercontent.com/starzel/buildout/4.2.5/linkto/base.cfg>`_
+- `4.2.3 <https://raw.githubusercontent.com/starzel/buildout/4.2.3/linkto/base.cfg>`_
+- `4.2.2 <https://raw.githubusercontent.com/starzel/buildout/4.2.2/linkto/base.cfg>`_
+
+To develop against the `Coredev of Plone 5 <https://github.com/plone/buildout.coredev/tree/5.0>`_ use ``local_coredev.cfg``.
+
+Please note that new features are not introduced to old versions.
 
 
 Quickstart
@@ -150,23 +171,26 @@ Features
 Debugging and Development
 +++++++++++++++++++++++++
 
+packages
+    All eggs of your buildout will be symlinked to in ``parts/packages``.
+
+zopepy
+    Run ``./bin/zopepy`` to have a python-prompt with all eggs of your buildout in its python-path.
+
+checkversions
+    Run ``./bin/checkversions floating_versions_project.cfg`` to check if your pinned eggs are up-to-date.
+
+codeintel
+    This part uses ``corneti.recipes.codeintel`` to prepare for codeintel-integration (useful for users of Sublime Text).
+
 stacktrace
     The part ``stacktrace-script`` adds a bash-script ``./bin/stack.sh`` that will print the current stacktrace to stdout. Useful to find out what Plone is doing when it's busy.
 
 code-analysis
     This installs a pre-commit-hook that runs the codeanalysis-tests from ``plone.recipe.codeanalysis``.
 
-omelette
-    All eggs of your buildout will be symlinked to in ``parts/omelette``.
-
-codeintel
-    This part uses ``corneti.recipes.codeintel`` to prepare for codeintel-integration (useful for users of Sublime Text).
-
-checkversions
-    Run ``./bin/checkversions floating_versions_project.cfg`` to check if your pinned eggs are up-to-date.
-
-zopepy
-    Run ``./bin/zopepy`` to have a python-prompt with all eggs of your buildout in its python-path.
+mrbob
+    This part adds `bobtemplates.plone <https://github.com/collective/bobtemplates.plone>`_ to simplify the creation of new addons.
 
 i18n
 ++++
@@ -210,7 +234,7 @@ Deployment
 ++++++++++
 
 nginx
-    TODO
+    TODO: Documentation
 
 haproxy
     If you cannot use chroot to run haproxy as a isolated user you need to modify ``templates/haproxy.cfg`` like this:
@@ -245,7 +269,7 @@ Sentry logging
     Configure zeoclients to send tracebacks to Sentry in ``local_production.cfg`` by uncommenting it and adding a dsn. You also need to enable the egg ``raven``. Repeat for each zeoclient.
 
 solr
-    TODO
+    TODO: Not included yet.
 
 
 Notes

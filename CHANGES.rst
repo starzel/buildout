@@ -1,5 +1,22 @@
 Changes
 
+3.3
+===
+- Add branch for Plone 5 and tag for 5.0a3 [pbauer]
+- Add local_coredev.cfg to develop against the coredev for Plone 5 [pbauer]
+- Rename omelette to packages [pbauer]
+- Add part mrbob for mr.bob and bobtemplates.plone [pbauer]
+- Move code-analysis to local_develop.cfg [pbauer]
+
+3.2.2
+=====
+- Bugfixes for local_jenkins [pbauer]
+- Use Plone 4.3.4 [pbauer]
+
+3.2.1
+=====
+- Bugfix in jenkins test script. Update local_jenkins.cfg [do3cc]
+
 3.2
 ===
 - Add a jenkins bootstrap script. No more complex jenkins configs [do3cc]
@@ -10,15 +27,6 @@ Changes
 - Add documentation [pbauer]
 - Add i18nize-all command to [do3cc]
 - Documentation
-
-3.2.1
-=====
-- Bugfix in jenkins test script. Update local_jenkins.cfg [do3cc]
-
-3.2.2
-=====
-- Bugfixes for local_jenkins [pbauer]
-- Use Plone 4.3.4 [pbauer]
 
 3.1 (unreleased)
 ================
