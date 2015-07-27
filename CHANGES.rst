@@ -2,6 +2,7 @@ Changes
 
 3.3
 ===
+- Add tag for 5.0b3, bump some version [pbauer]
 - Add branch for Plone 5 and tags for 5.0a3, 5.0b1 and 5.0b2-pending [pbauer]
 - Add local_coredev.cfg to develop against the coredev for Plone 5 [pbauer]
 - Rename omelette to packages [pbauer]
