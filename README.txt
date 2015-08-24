@@ -51,7 +51,7 @@ Versions
 
 We support the following version of Plone:
 
-- `5.0b4-pending <https://raw.githubusercontent.com/starzel/buildout/5.0b3-pending/linkto/base.cfg>`_
+- `5.0b4-pending <https://raw.githubusercontent.com/starzel/buildout/5.0b4-pending/linkto/base.cfg>`_ (while it exists)
 - `5.0b3 <https://raw.githubusercontent.com/starzel/buildout/5.0b3/linkto/base.cfg>`_
 - `5.0b2 <https://raw.githubusercontent.com/starzel/buildout/5.0b2/linkto/base.cfg>`_
 - `5.0b1 <https://raw.githubusercontent.com/starzel/buildout/5.0b1/linkto/base.cfg>`_
