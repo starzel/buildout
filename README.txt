@@ -29,15 +29,15 @@ Structure
 
     .. code-block:: ini
 
-        extends = https://raw.githubusercontent.com/starzel/buildout/5.0b4/linkto/base.cfg
+        extends = https://raw.githubusercontent.com/starzel/buildout/5.0rc1/linkto/base.cfg
 
-    This example refers to the tag 5.0b4 of this buildout that uses Plone 5.0b4 To use a different Plone-version simply change that to point to a different tag.
+    This example refers to the tag 5.0rc1 of this buildout that uses Plone 5.0rc1 To use a different Plone-version simply change that to point to a different tag.
 
 ``base.cfg``
     This remote file conatains most of the commonly used logic used for prodcution. It also includes two version-files that are also hosted on github:
 
-    * `pinned_versions.cfg <https://raw.githubusercontent.com/starzel/buildout/5.0b4/linkto/pinned_versions.cfg>`_: Pinns the Plone-version using http://dist.plone.org/release/5.0b4/versions.cfg
-    * `floating_versions.cfg <https://raw.githubusercontent.com/starzel/buildout/5.0b4/linkto/floating_versions.cfg>`_: Pinns all commonly used addons of this buildout.
+    * `pinned_versions.cfg <https://raw.githubusercontent.com/starzel/buildout/5.0rc1/linkto/pinned_versions.cfg>`_: Pinns the Plone-version using http://dist.plone.org/release/5.0rc1/versions.cfg
+    * `floating_versions.cfg <https://raw.githubusercontent.com/starzel/buildout/5.0rc1/linkto/floating_versions.cfg>`_: Pinns all commonly used addons of this buildout.
 
 ``pinned_versions_project.cfg``
     Here you pinn versions to overwrite or extend the hosted ``pinned_versions.cfg``. These eggs are usually pinned for a reason and are usually not safe to be upgraded.
@@ -51,6 +51,7 @@ Versions
 
 We support the following version of Plone:
 
+- `5.0rc1 <https://raw.githubusercontent.com/starzel/buildout/5.0rc1/linkto/base.cfg>`_
 - `5.0b4 <https://raw.githubusercontent.com/starzel/buildout/5.0b4/linkto/base.cfg>`_
 - `5.0b3 <https://raw.githubusercontent.com/starzel/buildout/5.0b3/linkto/base.cfg>`_
 - `5.0b2 <https://raw.githubusercontent.com/starzel/buildout/5.0b2/linkto/base.cfg>`_

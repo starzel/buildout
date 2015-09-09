@@ -2,6 +2,7 @@ Changes
 
 3.3
 ===
+- Add 5.0rc1 [pbauer]
 - Test 5.0b4 [pbauer]
 - Add tag for 5.0b3, bump some version [pbauer]
 - Add branch for Plone 5 and tags for 5.0a3, 5.0b1 and 5.0b2-pending [pbauer]
