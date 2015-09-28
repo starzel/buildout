@@ -29,21 +29,51 @@ Structure
 
     .. code-block:: ini
 
-        extends = https://raw.githubusercontent.com/starzel/buildout/4.3.4/linkto/base.cfg
+        extends = https://raw.githubusercontent.com/starzel/buildout/4.3.7/linkto/base.cfg
 
-    This example refers to the tag 4.3.4 of this buildout that uses Plone 4.3.4. To use a different Plone-version simply change that to point to a different tag.
+    This example refers to the tag 4.3.7 of this buildout that uses Plone 4.3.7. To use a different Plone-version simply change that to point to a different tag.
 
 ``base.cfg``
     This remote file conatains most of the commonly used logic used for prodcution. It also includes two version-files that are also hosted on github:
 
-    * `pinned_versions.cfg <https://raw.githubusercontent.com/starzel/buildout/4.3.4/linkto/pinned_versions.cfg>`_: Pinns the Plone-version using http://dist.plone.org/release/4.3.4/versions.cfg
-    * `floating_versions.cfg <https://raw.githubusercontent.com/starzel/buildout/4.3.4/linkto/floating_versions.cfg>`_: Pinns all commonly used addons of this buildout.
+    * `pinned_versions.cfg <https://raw.githubusercontent.com/starzel/buildout/4.3.7/linkto/pinned_versions.cfg>`_: Pinns the Plone-version using http://dist.plone.org/release/4.3.7/versions.cfg
+    * `floating_versions.cfg <https://raw.githubusercontent.com/starzel/buildout/4.3.7/linkto/floating_versions.cfg>`_: Pinns all commonly used addons of this buildout.
 
 ``pinned_versions_project.cfg``
     Here you pinn versions to overwrite or extend the hosted ``pinned_versions.cfg``. These eggs are usually pinned for a reason and are usually not safe to be upgraded.
 
 ``floating_versions_project.cfg``
     Here you overwrite and extend the hosted ``floating_versions.cfg``. These eggs should usually be safe to be upgraded. ``./bin/checkversions floating_versions_project.cfg`` will check pypi if there are newer releases for your pinned eggs.
+
+
+Versions
+--------
+
+We support the following version of Plone:
+
+- `5.0rc3 <https://raw.githubusercontent.com/starzel/buildout/5.0rc3/linkto/base.cfg>`_
+- `5.0rc2 <https://raw.githubusercontent.com/starzel/buildout/5.0rc2/linkto/base.cfg>`_
+- `5.0rc1 <https://raw.githubusercontent.com/starzel/buildout/5.0rc1/linkto/base.cfg>`_
+- `5.0b4 <https://raw.githubusercontent.com/starzel/buildout/5.0b4/linkto/base.cfg>`_
+- `5.0b3 <https://raw.githubusercontent.com/starzel/buildout/5.0b3/linkto/base.cfg>`_
+- `5.0b2 <https://raw.githubusercontent.com/starzel/buildout/5.0b2/linkto/base.cfg>`_
+- `5.0b1 <https://raw.githubusercontent.com/starzel/buildout/5.0b1/linkto/base.cfg>`_
+- `5.0a3 <https://raw.githubusercontent.com/starzel/buildout/5.0a3/linkto/base.cfg>`_
+- `4.3.7 <https://raw.githubusercontent.com/starzel/buildout/4.3.7/linkto/base.cfg>`_
+- `4.3.6 <https://raw.githubusercontent.com/starzel/buildout/4.3.6/linkto/base.cfg>`_
+- `4.3.4 <https://raw.githubusercontent.com/starzel/buildout/4.3.4/linkto/base.cfg>`_
+- `4.3.3 <https://raw.githubusercontent.com/starzel/buildout/4.3.3/linkto/base.cfg>`_
+- `4.3.2 <https://raw.githubusercontent.com/starzel/buildout/4.3.2/linkto/base.cfg>`_
+- `4.3.1 <https://raw.githubusercontent.com/starzel/buildout/4.3.1/linkto/base.cfg>`_
+- `4.3 <https://raw.githubusercontent.com/starzel/buildout/4.3/linkto/base.cfg>`_
+- `4.3rc1 <https://raw.githubusercontent.com/starzel/buildout/4.3rc1/linkto/base.cfg>`_
+- `4.2.5 <https://raw.githubusercontent.com/starzel/buildout/4.2.5/linkto/base.cfg>`_
+- `4.2.3 <https://raw.githubusercontent.com/starzel/buildout/4.2.3/linkto/base.cfg>`_
+- `4.2.2 <https://raw.githubusercontent.com/starzel/buildout/4.2.2/linkto/base.cfg>`_
+
+To develop against the `Coredev of Plone 5 <https://github.com/plone/buildout.coredev/tree/5.0>`_ use ``local_coredev.cfg``.
+
+Please note that new features are not introduced to old versions.
 
 
 Quickstart
@@ -167,6 +197,10 @@ checkversions
 
 zopepy
     Run ``./bin/zopepy`` to have a python-prompt with all eggs of your buildout in its python-path.
+
+mrbob
+    This part adds `bobtemplates.plone <https://github.com/collective/bobtemplates.plone>`_ to simplify the creation of new addons.
+
 
 i18n
 ++++
