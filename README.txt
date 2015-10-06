@@ -71,6 +71,7 @@ We support the following version of Plone:
 - `4.3.1 <https://raw.githubusercontent.com/starzel/buildout/4.3.1/linkto/base.cfg>`_
 - `4.3 <https://raw.githubusercontent.com/starzel/buildout/4.3/linkto/base.cfg>`_
 - `4.3rc1 <https://raw.githubusercontent.com/starzel/buildout/4.3rc1/linkto/base.cfg>`_
+- `4.2.7 <https://raw.githubusercontent.com/starzel/buildout/4.2.7/linkto/base.cfg>`_
 - `4.2.5 <https://raw.githubusercontent.com/starzel/buildout/4.2.5/linkto/base.cfg>`_
 - `4.2.3 <https://raw.githubusercontent.com/starzel/buildout/4.2.3/linkto/base.cfg>`_
 - `4.2.2 <https://raw.githubusercontent.com/starzel/buildout/4.2.2/linkto/base.cfg>`_
