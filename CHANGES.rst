@@ -2,6 +2,9 @@ Changes
 
 3.3
 ===
+- Add 5.0.2
+- Add Hotfixes
+- Add 5.0
 - Add 5.0rc1 [pbauer]
 - Test 5.0b4 [pbauer]
 - Add tag for 5.0b3, bump some version [pbauer]
