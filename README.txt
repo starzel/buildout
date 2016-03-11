@@ -64,6 +64,7 @@ We support the following version of Plone:
 - `5.0b2 <https://raw.githubusercontent.com/starzel/buildout/5.0b2/linkto/base.cfg>`_
 - `5.0b1 <https://raw.githubusercontent.com/starzel/buildout/5.0b1/linkto/base.cfg>`_
 - `5.0a3 <https://raw.githubusercontent.com/starzel/buildout/5.0a3/linkto/base.cfg>`_
+- `4.3.8 <https://raw.githubusercontent.com/starzel/buildout/4.3.8/linkto/base.cfg>`_
 - `4.3.7 <https://raw.githubusercontent.com/starzel/buildout/4.3.7/linkto/base.cfg>`_
 - `4.3.6 <https://raw.githubusercontent.com/starzel/buildout/4.3.6/linkto/base.cfg>`_
 - `4.3.4 <https://raw.githubusercontent.com/starzel/buildout/4.3.4/linkto/base.cfg>`_
@@ -119,8 +120,7 @@ Build Plone
 .. code-block:: bash
 
     $ virtualenv-2.7 .
-    $ ./bin/pip install -U setuptools
-    $ ./bin/python bootstrap.py
+    $ ./bin/pip install -r requirements.txt
     $ ./bin/buildout
 
 

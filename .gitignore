@@ -15,6 +15,7 @@ develop-eggs
 
 # Installer logs
 pip-log.txt
+pip-selfcheck.json
 .plone.versioncheck.cache
 .plone.versioncheck.tracked.json
 
