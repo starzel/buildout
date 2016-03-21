@@ -17,5 +17,5 @@ install:
   - ln -s local_develop.cfg local.cfg
   - echo -e "[buildout]\nlogin = admin\npassword = admin" > secret.cfg
 script:
-  - python bootstrap.py
+  - bin/pip install -r requirements.txt
   - bin/buildout -N
