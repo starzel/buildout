@@ -2,7 +2,7 @@ Changes
 
 3.3
 ===
-- Add 5.0.3-pending
+- Add 5.0.3
 - Add 4.3.8
 - Add 5.0.2
 - Add Hotfixes

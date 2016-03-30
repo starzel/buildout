@@ -39,3 +39,5 @@ etc/
 include/
 lib/
 local/
+
+.idea/
