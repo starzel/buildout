@@ -28,7 +28,7 @@ Structure
     This contains the project settings (name, addons, checkouts etc.).
 
 ``local.cfg``
-    For each environment (development, production, jenkins/test) there is a separate ``local_*.cfg``-file. You create a *symlink*  called ``local.cfg`` to one of these files depending on your environment. Each of the files includes the remote ``base.cfg`` that is hosted on github like this:
+    For each environment (development, production, test) there is a separate ``local_*.cfg``-file. You create a *symlink*  called ``local.cfg`` to one of these files depending on your environment. Each of the files includes the remote ``base.cfg`` that is hosted on github like this:
 
     .. code-block:: ini
 
@@ -65,6 +65,7 @@ We support the following version of Plone:
 - `5.0b2 <https://raw.githubusercontent.com/starzel/buildout/5.0b2/linkto/base.cfg>`_
 - `5.0b1 <https://raw.githubusercontent.com/starzel/buildout/5.0b1/linkto/base.cfg>`_
 - `5.0a3 <https://raw.githubusercontent.com/starzel/buildout/5.0a3/linkto/base.cfg>`_
+- `4.3.9 <https://raw.githubusercontent.com/starzel/buildout/4.3.9/linkto/base.cfg>`_
 - `4.3.8 <https://raw.githubusercontent.com/starzel/buildout/4.3.8/linkto/base.cfg>`_
 - `4.3.7 <https://raw.githubusercontent.com/starzel/buildout/4.3.7/linkto/base.cfg>`_
 - `4.3.6 <https://raw.githubusercontent.com/starzel/buildout/4.3.6/linkto/base.cfg>`_
@@ -242,8 +243,8 @@ i18nize-all
 Testing
 +++++++
 
-Setup for jenkins
-    Configure jenkins to run the script ``./bootstrap_jenkins.sh``. This will configure and run the whole buildout.
+Setup for gitlab-ci and jenkins
+    Configure your ci-system to run the script ``./bootstrap_ci.sh``. This will configure and run the whole buildout.
 
 
 Deployment
