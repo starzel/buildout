@@ -1,0 +1,8 @@
+before_script:
+    - /usr/bin/virtualenv .
+    - ./bootstrap_ci.sh
+job1:
+  script:
+     - export DISPLAY=:99
+     - ./bin/code-analysis
+     - ./bin/test
