@@ -76,6 +76,8 @@ To develop against the current `Coredev <https://github.com/plone/buildout.cored
 
 Please note that new features are not introduced to old versions.
 
+Tags for development-versions (alpha, beta and rc) will exists but will be removed after the final release of that version.
+
 
 Quickstart
 ----------
