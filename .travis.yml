@@ -31,14 +31,11 @@ install:
 
 script:
   - ./bin/buildout -N
-  - mkdir src
-  - cd src
-  - ../bin/mrbob -O project.site --config $HOME/mrbob_answers.txt bobtemplates:plone_addon
+  - ./bin/mrbob -O src/project.site --config $HOME/mrbob_answers.txt bobtemplates:plone_addon
   - sed -i "15i \    project.site" buildout.cfg
   - sed -i "19i \    project.site [test]" buildout.cfg
   - sed -i "23i \    project.site" buildout.cfg
   - sed -i "29i project.site = fs project.site full-path=\${buildout\:directory}/src/project.site" buildout.cfg
-  - cd ..
   - ./bin/buildout -N
   - ./bin/test
   - ./bin/coverage-test
