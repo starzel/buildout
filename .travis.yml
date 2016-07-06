@@ -9,6 +9,7 @@ python:
 before_install:
   - mkdir -p $HOME/buildout-cache/{eggs,downloads}
   - mkdir $HOME/.buildout
+
   - echo "[buildout]" > $HOME/.buildout/default.cfg
   - echo "download-cache = $HOME/buildout-cache/downloads" >> $HOME/.buildout/default.cfg
   - echo "eggs-directory = $HOME/buildout-cache/eggs" >> $HOME/.buildout/default.cfg
@@ -34,11 +35,15 @@ install:
 
 script:
   - buildout -N
+# create a package 'project.site' using bobtemplates.plone using mrbob_answers.txt
   - mkdir src
   - mrbob -O src/project.site --config $HOME/mrbob_answers.txt bobtemplates:plone_addon
+# add that package to buildout.cfg in eggs, testeggs, auto-checkout and [sources]
   - sed -i "15i \    project.site" buildout.cfg
   - sed -i "19i \    project.site [test]" buildout.cfg
   - sed -i "23i \    project.site" buildout.cfg
   - sed -i "29i project.site = fs project.site full-path=\${buildout\:directory}/src/project.site" buildout.cfg
+# re-run buildout
   - buildout -N
+# run tests with the new package using coverage
   - bin/coverage-test
