@@ -7,15 +7,38 @@ cache:
 python:
   - 2.7
 before_install:
-  - mkdir -p $HOME/buildout-cache/{eggs,downloads}
+  - mkdir -p $HOME/buildout-cache/{eggs,downloads,src}
   - mkdir $HOME/.buildout
   - echo "[buildout]" > $HOME/.buildout/default.cfg
   - echo "download-cache = $HOME/buildout-cache/downloads" >> $HOME/.buildout/default.cfg
   - echo "eggs-directory = $HOME/buildout-cache/eggs" >> $HOME/.buildout/default.cfg
-  - mkdir src
+  - echo "[variables]" > $HOME/mrbob_answers.txt
+  - echo "package.type = Basic" >> $HOME/mrbob_answers.txt
+  - echo "package.namespace = project" >> $HOME/mrbob_answers.txt
+  - echo "package.namespace2 =" >> $HOME/mrbob_answers.txt
+  - echo "package.name = site" >> $HOME/mrbob_answers.txt
+  - echo "package.description = A Dummy package" >> $HOME/mrbob_answers.txt
+  - echo "author.name = Philip Bauer" >> $HOME/mrbob_answers.txt
+  - echo "author.email = bauer@starzel.de" >> $HOME/mrbob_answers.txt
+  - echo "author.github.user = pbauer" >> $HOME/mrbob_answers.txt
+  - echo "author.irc = irc.freenode.org#plone" >> $HOME/mrbob_answers.txt
+  - echo "plone.version = 5.0.5" >> $HOME/mrbob_answers.txt
+
 install:
   - ln -s local_develop.cfg local.cfg
   - echo -e "[buildout]\nlogin = admin\npassword = admin" > secret.cfg
   - pip install -r requirements.txt
+
 script:
-  - buildout -N
+  - ./bin/buildout -N
+  - mkdir src
+  - cd src
+  - ../bin/mrbob -O project.site --config $HOME/mrbob_answers.txt bobtemplates:plone_addon
+  - sed -i "15i \    project.site" buildout.cfg
+  - sed -i "19i \    project.site [test]" buildout.cfg
+  - sed -i "23i \    project.site" buildout.cfg
+  - sed -i "29i project.site = fs project.site full-path=\${buildout\:directory}/src/project.site" buildout.cfg
+  - cd ..
+  - ./bin/buildout -N
+  - ./bin/test
+  - ./bin/coverage-test
