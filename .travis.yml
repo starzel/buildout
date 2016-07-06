@@ -29,6 +29,8 @@ install:
   - ln -s local_develop.cfg local.cfg
   - echo -e "[buildout]\nlogin = admin\npassword = admin" > secret.cfg
   - pip install -r requirements.txt
+  - pip install mr.bob
+  - pip install bobtemplates.plone
 
 script:
   - buildout -N
@@ -39,5 +41,4 @@ script:
   - sed -i "23i \    project.site" buildout.cfg
   - sed -i "29i project.site = fs project.site full-path=\${buildout\:directory}/src/project.site" buildout.cfg
   - buildout -N
-  - test
-  - coverage-test
+  - bin/coverage-test
