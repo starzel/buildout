@@ -4,3 +4,6 @@ include =
 omit =
     */test*
     */upgrades/*
+
+[html]
+directory = parts/test/htmlreport
