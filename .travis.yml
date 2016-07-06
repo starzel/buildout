@@ -1,3 +1,4 @@
+# This is NOT meant to be used in projects! It only tests the starzel-buildout.
 language: python
 sudo: false
 cache:
