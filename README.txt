@@ -294,6 +294,14 @@ solr
     TODO: Not included yet.
 
 
+Hotfixes
+++++++++
+
+This buildout automatically includes the correct Hotfixes for the version of Plone you use. E.g. the extends-file for Plone 5.0.6 https://raw.githubusercontent.com/starzel/buildout/5.0.6/linkto/base.cfg  pulls in the file https://raw.githubusercontent.com/starzel/buildout/master/linkto/hotfixes/5.0.6.cfg which in turn contains the pinns and eggs for all HotFixes for that version.
+
+By having the hotfixes-files in the master-branch we can easily update Hotfixes for each version without having to move any tags. The same day a Hotfix is published the corresponding extends-files will be updated. You simply have to rerun buildout and restart your site to include them.
+
+
 Notes
 -----
 
