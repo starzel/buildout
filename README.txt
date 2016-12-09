@@ -91,13 +91,13 @@ Quickstart
     $ git clone https://github.com/starzel/buildout SOME_PROJECT
     $ cd SOME_PROJECT
 
-You do not need the linkto-directory since its files are used via links to github.
+Remove all files that are not needed for a project but are only used for the buildout itself.
 
 .. code-block:: bash
 
-    $ rm -rf linkto
+    $ rm -rf linkto README.rst README.txt .travis.yml secret.cfg_tmpl VERSION.txt local_coredev.cfg CHANGES.rst
 
-If you are not developing the buildout itself you want a create a new repo.
+If you're not developing the buildout itself you want a create a new git repo.
 
 .. code-block:: bash
 
