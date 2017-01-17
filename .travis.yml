@@ -25,7 +25,7 @@ before_install:
   - echo "author.email = bauer@starzel.de" >> $HOME/mrbob_answers.txt
   - echo "author.github.user = pbauer" >> $HOME/mrbob_answers.txt
   - echo "author.irc = irc.freenode.org#plone" >> $HOME/mrbob_answers.txt
-  - echo "plone.version = 5.0.5" >> $HOME/mrbob_answers.txt
+  - echo "plone.version = 4.3.11" >> $HOME/mrbob_answers.txt
 
 install:
   - ln -s local_develop.cfg local.cfg
