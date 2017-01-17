@@ -44,6 +44,9 @@ script:
   - sed -i "19i \    project.site [test]" buildout.cfg
   - sed -i "23i \    project.site" buildout.cfg
   - sed -i "29i project.site = fs project.site full-path=\${buildout\:directory}/src/project.site" buildout.cfg
+# pinn versions of dependencied of the new package
+  - echo "[versions]" >> buildout.cfg
+  - echo "plone.api = 1.5" >> buildout.cfg
 # re-run buildout
   - buildout -N
 # run tests with the new package using coverage
