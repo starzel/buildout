@@ -161,7 +161,6 @@ In ``local_production.cfg`` to select the parts you really need. A average proje
         ${buildout:varnish-parts}
         ${buildout:supervisor-parts}
         ${buildout:cron-parts}
-        backup
         logrotate
         precompiler
 
