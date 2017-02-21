@@ -139,7 +139,7 @@ Symlink to the development-config:
 
     $ ln -s local_develop.cfg local.cfg
 
-The development-setup will build a simple instance with some useful tools (see below). The setup assumes that zeo, varnish, haproxy and nginx are only configured on production.
+The development-setup will build a simple instance with some useful tools (see below). The setup assumes that zeo, varnish and haproxy are only configured on production.
 
 
 Use in production
@@ -157,7 +157,6 @@ In ``local_production.cfg`` to select the parts you really need. A average proje
 
     parts +=
         ${buildout:zeo-ha-parts}
-        ${buildout:nginx-parts}
         ${buildout:varnish-parts}
         ${buildout:supervisor-parts}
         ${buildout:cron-parts}
@@ -253,9 +252,6 @@ Setup for gitlab-ci and jenkins
 
 Deployment
 ++++++++++
-
-nginx
-    TODO: Documentation
 
 haproxy
     If you cannot use chroot to run haproxy as a isolated user you need to modify ``templates/haproxy.cfg`` like this:
