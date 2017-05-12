@@ -26,7 +26,7 @@ sub vcl_init {
 
 acl purge {
     "localhost";
-    "${varnish-config:backend-host}";
+    "${varnish4-config:backend-host}";
 }
 
 sub vcl_recv {
