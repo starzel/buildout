@@ -54,6 +54,8 @@ Versions
 
 We support the following version of Plone:
 
+- `5.0.8 <https://raw.githubusercontent.com/starzel/buildout/5.0.8/linkto/base.cfg>`_
+- `5.0.7 <https://raw.githubusercontent.com/starzel/buildout/5.0.7/linkto/base.cfg>`_
 - `5.0.6 <https://raw.githubusercontent.com/starzel/buildout/5.0.6/linkto/base.cfg>`_
 - `5.0.5 <https://raw.githubusercontent.com/starzel/buildout/5.0.5/linkto/base.cfg>`_
 - `5.0.4 <https://raw.githubusercontent.com/starzel/buildout/5.0.4/linkto/base.cfg>`_
@@ -151,12 +153,12 @@ Symlink to the production-config:
 
     $ ln -s local_production.cfg local.cfg
 
-In ``local_production.cfg`` to select the parts you really need. A average project that uses haproxy, vanish and two zeoclients looks like this:
+In ``local_production.cfg`` to select the parts you really need. A average project that uses varnish and two zeoclients looks like this:
 
 .. code-block:: ini
 
     parts +=
-        ${buildout:zeo-ha-parts}
+        ${buildout:zeo-multi-parts}
         ${buildout:varnish-parts}
         ${buildout:supervisor-parts}
         ${buildout:cron-parts}
