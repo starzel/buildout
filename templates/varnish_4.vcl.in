@@ -12,8 +12,8 @@ import std;
 
 # configure all backends
 backend backend_000 {
-   .host = "${varnish4-config:backend-host}";
-   .port = "${varnish4-config:backend-port}";
+   .host = "localhost";
+   .port = "8080";
    .connect_timeout = 0.4s;
    .first_byte_timeout = 300s;
    .between_bytes_timeout  = 60s;
@@ -26,7 +26,7 @@ sub vcl_init {
 
 acl purge {
     "localhost";
-    "${varnish4-config:backend-host}";
+    "localhost";
 }
 
 sub vcl_recv {
