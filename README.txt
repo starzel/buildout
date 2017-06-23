@@ -54,6 +54,8 @@ Versions
 
 We support the following version of Plone:
 
+- `5.0.8 <https://raw.githubusercontent.com/starzel/buildout/5.0.8/linkto/base.cfg>`_
+- `5.0.7 <https://raw.githubusercontent.com/starzel/buildout/5.0.7/linkto/base.cfg>`_
 - `5.0.6 <https://raw.githubusercontent.com/starzel/buildout/5.0.6/linkto/base.cfg>`_
 - `5.0.5 <https://raw.githubusercontent.com/starzel/buildout/5.0.5/linkto/base.cfg>`_
 - `5.0.4 <https://raw.githubusercontent.com/starzel/buildout/5.0.4/linkto/base.cfg>`_
@@ -139,7 +141,7 @@ Symlink to the development-config:
 
     $ ln -s local_develop.cfg local.cfg
 
-The development-setup will build a simple instance with some useful tools (see below). The setup assumes that zeo, varnish, haproxy and nginx are only configured on production.
+The development-setup will build a simple instance with some useful tools (see below). The setup assumes that zeo, varnish and haproxy are only configured on production.
 
 
 Use in production
@@ -151,13 +153,12 @@ Symlink to the production-config:
 
     $ ln -s local_production.cfg local.cfg
 
-In ``local_production.cfg`` to select the parts you really need. A average project that uses haproxy, vanish and two zeoclients looks like this:
+In ``local_production.cfg`` to select the parts you really need. A average project that uses varnish and two zeoclients looks like this:
 
 .. code-block:: ini
 
     parts +=
-        ${buildout:zeo-ha-parts}
-        ${buildout:nginx-parts}
+        ${buildout:zeo-multi-parts}
         ${buildout:varnish-parts}
         ${buildout:supervisor-parts}
         ${buildout:cron-parts}
@@ -253,9 +254,6 @@ Setup for gitlab-ci and jenkins
 
 Deployment
 ++++++++++
-
-nginx
-    TODO: Documentation
 
 haproxy
     If you cannot use chroot to run haproxy as a isolated user you need to modify ``templates/haproxy.cfg`` like this:
