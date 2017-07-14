@@ -153,19 +153,70 @@ Symlink to the production-config:
 
     $ ln -s local_production.cfg local.cfg
 
-In ``local_production.cfg`` to select the parts you really need. A average project that uses varnish and two zeoclients looks like this:
+A average project could use this stack pipline:
+
+          nginx > varnish > nginx > 2 x zeoclients > zeoserver
+
+In ``local_production.cfg`` select the parts you really need.
 
 .. code-block:: ini
 
     parts +=
         ${buildout:zeo-multi-parts}
-        ${buildout:varnish-parts}
+        ${buildout:varnish}
         ${buildout:supervisor-parts}
         ${buildout:cron-parts}
         logrotate
         precompiler
 
 Also modify ``templates/supervisord.conf`` to have supervisor manage the parts you want to use.
+
+Server stack
+++++++++++++
+
+``Frontend webserver (Nginx)``
+    The first Nginx manages the virtualhost, rewirtes if needed and terminates the SSL (before varnish). A minimal config cloud be found in the  `demo.plone.de project <https://github.com/collective/demo.plone.de/blob/master/templates/nginx.conf>`_.
+    More information can also be found in the `PloneDocs <https://docs.plone.org/manage/deploying/front-end/nginx.html#minimal-nginx-front-end-configuration-for-plone-on-ubuntu-debian-linux>`_
+
+``Cache (Varnish)``
+    After nginx we use varnish to cache the site. You can activate it like this:
+
+    .. code-block:: ini
+
+        # comment out what you need
+        parts += # Choose one!
+        ...
+        ${buildout:varnish}
+        ...
+
+    Take a look in ``linkto/base.cfg`` for the varnish4-config & varnish parts, there are several switches to configure.
+
+    Its best practice to install varnish from your distribution repository. If this is not possible we added support to build it:
+
+    .. code-block:: ini
+
+        parts +=
+            varnish-build
+            ${buildout:varnish}
+
+        [varnish-build]
+        recipe = plone.recipe.varnish:build
+        url = https://repo.varnish-cache.org/source/varnish-4.0.4.tar.gz
+        varnish_version = 4.0
+
+``Loadbalancer (Nginx)``
+    Another Nginx spread the requests to several Zeoclients, here is a minimal config. In production you can look at `demo.plone.de project <https://github.com/collective/demo.plone.de/blob/master/templates/nginx.conf>`_
+
+    .. code-block:: ini
+        # starzel (zeoclients)
+        upstream starzel_zeoclients {
+            ip_hash;
+            server 127.0.0.1:9182;
+            server 127.0.0.1:9183;
+            server 127.0.0.1:9184;
+            }
+
+    The ``ip_hash`` option is needed for multiple Zeoclients, more information can be found in this `issue <https://github.com/collective/plone.recipe.varnish/issues/37>`_
 
 
 Use for test-instances
@@ -255,40 +306,11 @@ Setup for gitlab-ci and jenkins
 Deployment
 ++++++++++
 
-haproxy
-    If you cannot use chroot to run haproxy as a isolated user you need to modify ``templates/haproxy.cfg`` like this:
-
-    .. code-block::
-
-        global
-          maxconn 480
-          user ${haproxy-conf:user}
-          group ${haproxy-conf:group}
-          daemon
-          log 127.0.0.1 local2
-
-varnish
-    Up to Plone 4.3.3 we still use varnish 2. To use varnish 3 please modify your ``local_production.cfg`` like this:
-
-    .. code-block:: ini
-
-        [varnish]
-        varnish_version = 3
-
-        [varnish-config]
-        input = templates/varnish_3x.vcl.in
-
-    varnish 4: TODO. See https://github.com/plone/documentation/blob/master/manage/deploying/caching/varnish4.rst
-
-
 monitoring
     Change the settings for ``maxram`` to have memmon restart an instance when it uses up to much memory.
 
 Sentry logging
     Configure zeoclients to send tracebacks to Sentry in ``local_production.cfg`` by uncommenting it and adding a dsn. You also need to enable the egg ``raven``. Repeat for each zeoclient.
-
-solr
-    TODO: Not included yet.
 
 
 Hotfixes
