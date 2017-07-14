@@ -54,6 +54,8 @@ Versions
 
 We support the following version of Plone:
 
+- `5.1b4 <https://raw.githubusercontent.com/starzel/buildout/5.1b4/linkto/base.cfg>`_ (stable release is pending)
+- `5.1b3 <https://raw.githubusercontent.com/starzel/buildout/5.1b3/linkto/base.cfg>`_
 - `5.0.8 <https://raw.githubusercontent.com/starzel/buildout/5.0.8/linkto/base.cfg>`_
 - `5.0.7 <https://raw.githubusercontent.com/starzel/buildout/5.0.7/linkto/base.cfg>`_
 - `5.0.6 <https://raw.githubusercontent.com/starzel/buildout/5.0.6/linkto/base.cfg>`_
@@ -62,6 +64,8 @@ We support the following version of Plone:
 - `5.0.3 <https://raw.githubusercontent.com/starzel/buildout/5.0.3/linkto/base.cfg>`_
 - `5.0.2 <https://raw.githubusercontent.com/starzel/buildout/5.0.2/linkto/base.cfg>`_
 - `5.0 <https://raw.githubusercontent.com/starzel/buildout/5.0/linkto/base.cfg>`_
+- `4.3.15 <https://raw.githubusercontent.com/starzel/buildout/4.3.15/linkto/base.cfg>`_ (stable release is pending)
+- `4.3.14 <https://raw.githubusercontent.com/starzel/buildout/4.3.14/linkto/base.cfg>`_
 - `4.3.11 <https://raw.githubusercontent.com/starzel/buildout/4.3.11/linkto/base.cfg>`_
 - `4.3.10 <https://raw.githubusercontent.com/starzel/buildout/4.3.10/linkto/base.cfg>`_
 - `4.3.9 <https://raw.githubusercontent.com/starzel/buildout/4.3.9/linkto/base.cfg>`_
@@ -141,7 +145,7 @@ Symlink to the development-config:
 
     $ ln -s local_develop.cfg local.cfg
 
-The development-setup will build a simple instance with some useful tools (see below). The setup assumes that zeo, varnish and haproxy are only configured on production.
+The development-setup will build a simple instance with some useful tools (see below). The setup assumes that zeo, varnish and loadbalancing are only configured on production.
 
 
 Use in production
@@ -155,7 +159,7 @@ Symlink to the production-config:
 
 A average project could use this stack pipeline::
 
-    nginx > varnish > nginx > 2 x zeoclients > zeoserver
+    nginx > varnish > nginx (for load-balancing) > at least 2 zeoclients > zeoserver
 
 In ``local_production.cfg`` select the parts you really need.
 
@@ -175,7 +179,7 @@ Server stack
 ++++++++++++
 
 ``Frontend webserver (Nginx)``
-    The first Nginx manages the virtualhost, rewirtes if needed and terminates the SSL (before varnish). A minimal config cloud be found in the  `demo.plone.de project <https://github.com/collective/demo.plone.de/blob/master/templates/nginx.conf>`_.
+    The first Nginx manages the virtualhost, rewrites if needed and terminates the SSL (before varnish). A minimal config cloud be found in the  `demo.plone.de project <https://github.com/collective/demo.plone.de/blob/master/templates/nginx.conf>`_.
     More information can also be found in the `PloneDocs <https://docs.plone.org/manage/deploying/front-end/nginx.html#minimal-nginx-front-end-configuration-for-plone-on-ubuntu-debian-linux>`_
 
 ``Cache (Varnish)``
