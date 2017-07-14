@@ -153,9 +153,9 @@ Symlink to the production-config:
 
     $ ln -s local_production.cfg local.cfg
 
-A average project could use this stack pipline:
+A average project could use this stack pipeline::
 
-          nginx > varnish > nginx > 2 x zeoclients > zeoserver
+    nginx > varnish > nginx > 2 x zeoclients > zeoserver
 
 In ``local_production.cfg`` select the parts you really need.
 
@@ -191,7 +191,7 @@ Server stack
 
     Take a look in ``linkto/base.cfg`` for the varnish4-config & varnish parts, there are several switches to configure.
 
-    Its best practice to install varnish from your distribution repository. If this is not possible we added support to build it:
+    It is best practice to install varnish from your distribution repository. If this is not possible you can build it by adding the part ``varnish-build``:
 
     .. code-block:: ini
 
@@ -204,19 +204,29 @@ Server stack
         url = https://repo.varnish-cache.org/source/varnish-4.0.4.tar.gz
         varnish_version = 4.0
 
+    If you use the system-varnish you need to tell that varnish about your config and also override the some settings in the part ``[varnish4]`` with whatever your systems varnish needs. Here is one example:
+
+    .. code-block:: ini
+
+        [varnish4]
+        daemon = /usr/sbin/varnishd
+        pid = /var/run/varnishd.pid
+
 ``Loadbalancer (Nginx)``
-    Another Nginx spread the requests to several Zeoclients, here is a minimal config. In production you can look at `demo.plone.de project <https://github.com/collective/demo.plone.de/blob/master/templates/nginx.conf>`_
+    Another Nginx spreads the requests to several Zeoclients, here is a minimal config. In production you can look at `demo.plone.de project <https://github.com/collective/demo.plone.de/blob/master/templates/nginx.conf>`_
 
     .. code-block:: ini
         # starzel (zeoclients)
         upstream starzel_zeoclients {
             ip_hash;
-            server 127.0.0.1:9182;
-            server 127.0.0.1:9183;
-            server 127.0.0.1:9184;
+            server 127.0.0.1:8082;
+            server 127.0.0.1:8083;
+            server 127.0.0.1:8084;
             }
 
     The ``ip_hash`` option is needed for multiple Zeoclients, more information can be found in this `issue <https://github.com/collective/plone.recipe.varnish/issues/37>`_
+
+    The ip and port has be the same as the settings for the zeoclients in then part ``[bindips]`` and ``[ports]``.
 
 
 Use for test-instances
