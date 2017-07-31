@@ -54,7 +54,7 @@ Versions
 
 We support the following version of Plone:
 
-- `5.1b4 <https://raw.githubusercontent.com/starzel/buildout/5.1b4/linkto/base.cfg>`_ (stable release is pending)
+- `5.1b4 <https://raw.githubusercontent.com/starzel/buildout/5.1b4/linkto/base.cfg>`_
 - `5.1b3 <https://raw.githubusercontent.com/starzel/buildout/5.1b3/linkto/base.cfg>`_
 - `5.0.8 <https://raw.githubusercontent.com/starzel/buildout/5.0.8/linkto/base.cfg>`_
 - `5.0.7 <https://raw.githubusercontent.com/starzel/buildout/5.0.7/linkto/base.cfg>`_
@@ -64,7 +64,7 @@ We support the following version of Plone:
 - `5.0.3 <https://raw.githubusercontent.com/starzel/buildout/5.0.3/linkto/base.cfg>`_
 - `5.0.2 <https://raw.githubusercontent.com/starzel/buildout/5.0.2/linkto/base.cfg>`_
 - `5.0 <https://raw.githubusercontent.com/starzel/buildout/5.0/linkto/base.cfg>`_
-- `4.3.15 <https://raw.githubusercontent.com/starzel/buildout/4.3.15/linkto/base.cfg>`_ (stable release is pending)
+- `4.3.15 <https://raw.githubusercontent.com/starzel/buildout/4.3.15/linkto/base.cfg>`_
 - `4.3.14 <https://raw.githubusercontent.com/starzel/buildout/4.3.14/linkto/base.cfg>`_
 - `4.3.11 <https://raw.githubusercontent.com/starzel/buildout/4.3.11/linkto/base.cfg>`_
 - `4.3.10 <https://raw.githubusercontent.com/starzel/buildout/4.3.10/linkto/base.cfg>`_
