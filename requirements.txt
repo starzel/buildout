@@ -1,4 +1,4 @@
-setuptools==36.0.1
+setuptools==36.2.7
 zc.buildout==2.9.4
 appdirs==1.4.3
 packaging==16.8
