@@ -180,7 +180,7 @@ Server stack
 ++++++++++++
 
 ``Frontend webserver (Nginx)``
-    The first Nginx manages the virtualhost, rewrites if needed and terminates the SSL (before varnish). A minimal config cloud be found in the  `demo.plone.de project <https://github.com/collective/demo.plone.de/blob/master/templates/nginx.conf>`_.
+    The first Nginx manages the virtualhost, does url rewrites if needed and terminates the SSL (needs to be done before varnish). A minimal config cloud be found in the  `demo.plone.de project <https://github.com/collective/demo.plone.de/blob/master/templates/nginx.conf>`_.
     More information can also be found in the `PloneDocs <https://docs.plone.org/manage/deploying/front-end/nginx.html#minimal-nginx-front-end-configuration-for-plone-on-ubuntu-debian-linux>`_
 
 ``Cache (Varnish)``
@@ -209,7 +209,7 @@ Server stack
         url = https://repo.varnish-cache.org/source/varnish-4.0.4.tar.gz
         varnish_version = 4.0
 
-    If you use the system-varnish you need to tell that varnish about your config and also override the some settings in the part ``[varnish4]`` with whatever your systems varnish needs. Here is one example:
+    If you use the system-varnish you need to tell varnish about your config and also override some settings in this part ``[varnish4]`` with whatever your systems varnish needs. Here is one example:
 
     .. code-block:: ini
 
@@ -218,7 +218,7 @@ Server stack
         pid = /var/run/varnishd.pid
 
 ``Loadbalancer (Nginx)``
-    Another Nginx spreads the requests to several Zeoclients, here is a minimal config. In production you can look at `demo.plone.de project <https://github.com/collective/demo.plone.de/blob/master/templates/nginx.conf>`_
+    Another Nginx spreads the requests to several Zeoclients, here is a minimal config. In production you can look again at the `demo.plone.de project <https://github.com/collective/demo.plone.de/blob/master/templates/nginx.conf>`_
 
     .. code-block:: ini
         # starzel (zeoclients)
@@ -231,7 +231,7 @@ Server stack
 
     The ``ip_hash`` option is needed for multiple Zeoclients, more information can be found in this `issue <https://github.com/collective/plone.recipe.varnish/issues/37>`_
 
-    The ip and port has be the same as the settings for the zeoclients in then part ``[bindips]`` and ``[ports]``.
+    The ip and port has to be the same as the settings for the zeoclients in then part ``[bindips]`` and ``[ports]``.
 
 
 Use for test-instances
