@@ -191,31 +191,21 @@ Server stack
         # comment out what you need
         parts += # Choose one!
         ...
-        ${buildout:varnish}
+        varnish4-config
         ...
 
-    Take a look in ``linkto/base.cfg`` for the varnish4-config & varnish parts, there are several switches to configure.
+    Take a look in ``linkto/base.cfg`` for the varnish4-config part, there are several switches to configure.
 
-    It is best practice to install varnish from your distribution repository. If this is not possible you can build it by adding the part ``varnish-build``:
+    It is best practice to install varnish from your distribution repository. If this is not possible you can build it, see the section below.
 
-    .. code-block:: ini
-
-        parts +=
-            varnish-build
-            ${buildout:varnish}
-
-        [varnish-build]
-        recipe = plone.recipe.varnish:build
-        url = https://repo.varnish-cache.org/source/varnish-4.0.4.tar.gz
-        varnish_version = 4.0
-
-    If you use the system-varnish you need to tell varnish about your config and also override some settings in this part ``[varnish4]`` with whatever your systems varnish needs. Here is one example:
+    If you use the system-varnish you need only need the ``[varnish4-config]`` part, it will generate the config (vcl) for you. In ``/etc/varnish/default.vcl`` include the generated vcl:
 
     .. code-block:: ini
+        vcl 4.0;
 
-        [varnish4]
-        daemon = /usr/sbin/varnishd
-        pid = /var/run/varnishd.pid
+        include "<path to your buildout>/etc/varnish4.vcl";
+
+    A ``systemctl restart varnish`` should activate the new config. TODO Add info about multiple sites with one varnish
 
 ``Loadbalancer (Nginx)``
     Another Nginx spreads the requests to several Zeoclients, here is a minimal config. In production you can look again at the `demo.plone.de project <https://github.com/collective/demo.plone.de/blob/master/templates/nginx.conf>`_
@@ -232,6 +222,27 @@ Server stack
     The ``ip_hash`` option is needed for multiple Zeoclients, more information can be found in this `issue <https://github.com/collective/plone.recipe.varnish/issues/37>`_
 
     The ip and port has to be the same as the settings for the zeoclients in then part ``[bindips]`` and ``[ports]``.
+
+
+Build varnish
++++++++++++++
+
+If you need to build varnish, you need to add ``varnish-build``:
+
+    .. code-block:: ini
+        # comment out what you need
+        parts +=
+        ...
+        ${buildout:varnish}
+        varnish-build
+        ...
+
+        [varnish-build]
+        recipe = plone.recipe.varnish:build
+        url = https://repo.varnish-cache.org/source/varnish-4.0.4.tar.gz
+        varnish_version = 4.0
+
+The ``varnish4`` part generates a start script, this can be used together with supervisord.
 
 
 Use for test-instances
