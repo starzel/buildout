@@ -201,6 +201,7 @@ Server stack
     If you use the system-varnish you need only need the ``[varnish4-config]`` part, it will generate the config (vcl) for you. In ``/etc/varnish/default.vcl`` include the generated vcl:
 
     .. code-block:: ini
+
         vcl 4.0;
 
         include "<path to your buildout>/etc/varnish4.vcl";
@@ -211,6 +212,7 @@ Server stack
     Another Nginx spreads the requests to several Zeoclients, here is a minimal config. In production you can look again at the `demo.plone.de project <https://github.com/collective/demo.plone.de/blob/master/templates/nginx.conf>`_
 
     .. code-block:: ini
+
         # starzel (zeoclients)
         upstream starzel_zeoclients {
             ip_hash;
@@ -230,6 +232,7 @@ Build varnish
 If you need to build varnish, you need to add ``varnish-build``:
 
     .. code-block:: ini
+
         # comment out what you need
         parts +=
         ...
