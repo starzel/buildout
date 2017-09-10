@@ -93,38 +93,38 @@ Tags for development-versions (alpha, beta and rc) will exists but will be remov
 Quickstart
 ----------
 
-.. code-block:: bash
+.. code-block:: shell-session
 
     $ git clone https://github.com/starzel/buildout SOME_PROJECT
     $ cd SOME_PROJECT
 
 Remove all files that are not needed for a project but are only used for the buildout itself.
 
-.. code-block:: bash
+.. code-block:: shell-session
 
     $ rm -rf linkto README.rst README.txt .travis.yml secret.cfg_tmpl VERSION.txt local_coredev.cfg CHANGES.rst
 
 If you're not developing the buildout itself you want a create a new git repo.
 
-.. code-block:: bash
+.. code-block:: shell-session
 
     $ rm -rf .git && git init
 
 Add a file that contains a passwort. Do **not** use ``admin`` as a password in production!
 
-.. code-block:: bash
+.. code-block:: shell-session
 
     $ echo -e "[buildout]\nlogin = admin\npassword = admin" > secret.cfg
 
 Symlink to the file that best fits you local environment. At first that is usually development. Later you can use production or test. This buildout only uses ``local.cfg`` and ignores all ``local_*.cfg``.
 
-.. code-block:: bash
+.. code-block:: shell-session
 
     $ ln -s local_develop.cfg local.cfg
 
 Build Plone
 
-.. code-block:: bash
+.. code-block:: shell-session
 
     $ virtualenv-2.7 .
     $ ./bin/pip install -r requirements.txt
@@ -142,7 +142,7 @@ Use in development
 
 Symlink to the development-config:
 
-.. code-block:: bash
+.. code-block:: shell-session
 
     $ ln -s local_develop.cfg local.cfg
 
@@ -154,7 +154,7 @@ Use in production
 
 Symlink to the production-config:
 
-.. code-block:: bash
+.. code-block:: shell-session
 
     $ ln -s local_production.cfg local.cfg
 
@@ -231,19 +231,19 @@ Build varnish
 
 If you need to build varnish, you need to add ``varnish-build``:
 
-    .. code-block:: ini
+.. code-block:: ini
 
-        # comment out what you need
-        parts +=
-        ...
-        ${buildout:varnish}
-        varnish-build
-        ...
+    # comment out what you need
+    parts +=
+    [...]
+    ${buildout:varnish}
+    varnish-build
+    [...]
 
-        [varnish-build]
-        recipe = plone.recipe.varnish:build
-        url = https://repo.varnish-cache.org/source/varnish-4.0.4.tar.gz
-        varnish_version = 4.0
+    [varnish-build]
+    recipe = plone.recipe.varnish:build
+    url = https://repo.varnish-cache.org/source/varnish-4.0.4.tar.gz
+    varnish_version = 4.0
 
 The ``varnish4`` part generates a start script, this can be used together with supervisord.
 
