@@ -262,7 +262,7 @@ In ``sub vcl_recv`` we remove the backend (set req.backend_hint = backend_000;) 
         set req.backend_hint = 002;
     }
    
-This does the vhost routing to the different backends. "my_host" is the upstream name of the cache, see the config of `demo.plone.de project <https://github.com/collective/demo.plone.de/blob/master/templates/nginx.conf>`_.
+This does the vhost routing to the different backends. "my_host" is the upstream name of the cache, see the config of `demo.plone.de project <https://github.com/collective/demo.plone.de/blob/master/templates/nginx.conf>`_. The Varnish config can be tested with this command: ``varnishd -C -f /etc/varnish/default.vcl``
 
 Build varnish
 +++++++++++++
