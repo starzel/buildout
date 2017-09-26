@@ -206,8 +206,8 @@ Server stack
 
         include "<path to your buildout>/etc/varnish4.vcl";
 
-    A ``systemctl restart varnish`` should activate the new config. TODO Add info about multiple sites with one varnish
-
+    A ``systemctl restart varnish`` should activate the new config. To use one varnish with serveral vhosts, see the ``Varnish with multiple sites``
+    
 ``Loadbalancer (Nginx)``
     Another Nginx spreads the requests to several Zeoclients, here is a minimal config. In production you can look again at the `demo.plone.de project <https://github.com/collective/demo.plone.de/blob/master/templates/nginx.conf>`_
 
@@ -225,6 +225,44 @@ Server stack
 
     The ip and port has to be the same as the settings for the zeoclients in then part ``[bindips]`` and ``[ports]``.
 
+Varnish with multiple sites
++++++++++++++++++++++++++++
+
+The generated varnish config works with a single vhost, for multiple sites/domains we need a custom varnish config. As multiple sites not yet build into the buildout script/template, we need to do changes manual in a copy of a varnish config file.
+
+In the varnish4.vcl we need to add the additional backend, note the different loadbalancer port.
+
+.. code-block:: ini
+
+    backend 001 {
+       .host = "localhost";
+       .port = "8091";
+       .connect_timeout = 0.4s;
+       .first_byte_timeout = 300s;
+       .between_bytes_timeout  = 60s;
+    }
+
+    backend 002 {
+       .host = "localhost";
+       .port = "8081";
+       .connect_timeout = 0.4s;
+       .first_byte_timeout = 300s;
+       .between_bytes_timeout  = 60s;
+    }
+
+In ``sub vcl_recv`` we remove the backend (set req.backend_hint = backend_000;) and add this switch:
+
+
+.. code-block:: ini
+
+    if (req.http.host == "my_host") {
+        set req.backend_hint = 001;
+    }
+    else {
+        set req.backend_hint = 002;
+    }
+   
+This does the vhost routing to the different backends. "my_host" is the upstream name of the cache, see the config of `demo.plone.de project <https://github.com/collective/demo.plone.de/blob/master/templates/nginx.conf>`_.
 
 Build varnish
 +++++++++++++
