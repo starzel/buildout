@@ -199,7 +199,7 @@ Server stack
 
     It is best practice to install varnish from your distribution repository. If this is not possible you can build it, see the section below.
 
-    If you use the system-varnish you need only need the ``[varnish4-config]`` part, it will generate the config (vcl) for you. In ``/etc/varnish/default.vcl`` include the generated vcl:
+    If you use the system-varnish only need the ``[varnish4-config]`` part, it will generate the config (vcl) for you. In ``/etc/varnish/default.vcl`` include the generated vcl:
 
     .. code-block:: ini
 
@@ -207,10 +207,10 @@ Server stack
 
         include "<path to your buildout>/etc/varnish4.vcl";
 
-    A ``systemctl restart varnish`` should activate the new config. TODO Add info about multiple sites with one varnish
-
+    A ``systemctl restart varnish`` should activate the new config. To use one varnish installation with serveral vhosts, see the ``Varnish with multiple sites`` section below.
+    
 ``Loadbalancer (Nginx)``
-    Another Nginx spreads the requests to several Zeoclients, here is a minimal config. In production you can look again at the `demo.plone.de project <https://github.com/collective/demo.plone.de/blob/master/templates/nginx.conf>`_
+    Another Nginx spreads the requests to several Zeoclients, here is a minimal config. In production you can look at the `demo.plone.de project <https://github.com/collective/demo.plone.de/blob/master/templates/nginx.conf>`_
 
     .. code-block:: ini
 
@@ -226,6 +226,43 @@ Server stack
 
     The ip and port has to be the same as the settings for the zeoclients in then part ``[bindips]`` and ``[ports]``.
 
+Varnish with multiple sites
++++++++++++++++++++++++++++
+
+The generated varnish config works with a single vhost, for multiple sites/domains we need a custom varnish config. This configuration is not yet build into the buildout script/template, we need to do the changes manually in a copy of a varnish config file (just copy the varnis4.vcl over to /etc/varnish and include it in default.vcl).
+
+In the varnish4.vcl we need to add the additional backend, note the different loadbalancer port.
+
+.. code-block:: ini
+
+    backend 001 {
+       .host = "localhost";
+       .port = "8091";
+       .connect_timeout = 0.4s;
+       .first_byte_timeout = 300s;
+       .between_bytes_timeout  = 60s;
+    }
+
+    backend 002 {
+       .host = "localhost";
+       .port = "8081";
+       .connect_timeout = 0.4s;
+       .first_byte_timeout = 300s;
+       .between_bytes_timeout  = 60s;
+    }
+
+In ``sub vcl_recv`` we remove the backend (set req.backend_hint = backend_000;) and add this switch:
+
+.. code-block:: ini
+
+    if (req.http.host == "my_host") {
+        set req.backend_hint = 001;
+    }
+    else {
+        set req.backend_hint = 002;
+    }
+   
+This does the vhost routing to the different backends. "my_host" is the upstream name of the cache, see the config of `demo.plone.de project <https://github.com/collective/demo.plone.de/blob/master/templates/nginx.conf>`_. The Varnish config can be tested with this command: ``varnishd -C -f /etc/varnish/default.vcl``
 
 Build varnish
 +++++++++++++
