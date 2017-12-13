@@ -54,6 +54,7 @@ Versions
 
 We support the following version of Plone:
 
+- `5.1rc2 <https://raw.githubusercontent.com/starzel/buildout/5.1rc2/linkto/base.cfg>`_
 - `5.1rc1 <https://raw.githubusercontent.com/starzel/buildout/5.1rc1/linkto/base.cfg>`_
 - `5.1b4 <https://raw.githubusercontent.com/starzel/buildout/5.1b4/linkto/base.cfg>`_
 - `5.1b3 <https://raw.githubusercontent.com/starzel/buildout/5.1b3/linkto/base.cfg>`_
@@ -208,7 +209,7 @@ Server stack
         include "<path to your buildout>/etc/varnish4.vcl";
 
     A ``systemctl restart varnish`` should activate the new config. To use one varnish installation with serveral vhosts, see the ``Varnish with multiple sites`` section below.
-    
+
 ``Loadbalancer (Nginx)``
     Another Nginx spreads the requests to several Zeoclients, here is a minimal config. In production you can look at the `demo.plone.de project <https://github.com/collective/demo.plone.de/blob/master/templates/nginx.conf>`_
 
@@ -261,7 +262,7 @@ In ``sub vcl_recv`` we remove the backend (set req.backend_hint = backend_000;) 
     else {
         set req.backend_hint = 002;
     }
-   
+
 This does the vhost routing to the different backends. "my_host" is the upstream name of the cache, see the config of `demo.plone.de project <https://github.com/collective/demo.plone.de/blob/master/templates/nginx.conf>`_. The Varnish config can be tested with this command: ``varnishd -C -f /etc/varnish/default.vcl``
 
 Build varnish

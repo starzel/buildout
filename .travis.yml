@@ -4,17 +4,11 @@ sudo: false
 cache:
   pip: true
   directories:
-    - $HOME/buildout-cache
+  - eggs
+  - downloads
 python:
   - 2.7
 before_install:
-  - mkdir -p $HOME/buildout-cache/{eggs,downloads}
-  - mkdir $HOME/.buildout
-
-  - echo "[buildout]" > $HOME/.buildout/default.cfg
-  - echo "download-cache = $HOME/buildout-cache/downloads" >> $HOME/.buildout/default.cfg
-  - echo "eggs-directory = $HOME/buildout-cache/eggs" >> $HOME/.buildout/default.cfg
-
   - echo "[variables]" > $HOME/mrbob_answers.txt
   - echo "package.type = Basic" >> $HOME/mrbob_answers.txt
   - echo "package.namespace = project" >> $HOME/mrbob_answers.txt
@@ -28,14 +22,16 @@ before_install:
   - echo "plone.version = 5.0.5" >> $HOME/mrbob_answers.txt
 
 install:
+  - virtualenv -p `which python` .
   - ln -s local_develop.cfg local.cfg
   - echo -e "[buildout]\nlogin = admin\npassword = admin" > secret.cfg
-  - pip install -r requirements.txt
+  - bin/pip install -r requirements.txt
   - pip install mr.bob
   - pip install bobtemplates.plone
+  - bin/buildout -N buildout:download-cache=downloads code-analysis:return-status-codes=True annotate
 
 script:
-  - buildout -N
+  - bin/buildout -N buildout:download-cache=downloads code-analysis:return-status-codes=True
 # create a package 'project.site' using bobtemplates.plone using mrbob_answers.txt
   - mkdir src
   - mrbob -O src/project.site --config $HOME/mrbob_answers.txt bobtemplates:plone_addon
@@ -45,6 +41,6 @@ script:
   - sed -i "23i \    project.site" buildout.cfg
   - sed -i "29i project.site = fs project.site full-path=\${buildout\:directory}/src/project.site" buildout.cfg
 # re-run buildout
-  - buildout -N
+  - bin/buildout -N buildout:download-cache=downloads code-analysis:return-status-codes=True
 # run tests with the new package using coverage
   - bin/coverage-test
