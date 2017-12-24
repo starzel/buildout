@@ -281,7 +281,7 @@ If you need to build varnish, you need to add ``varnish-build``:
 
     [varnish-build]
     recipe = plone.recipe.varnish:build
-    url = https://repo.varnish-cache.org/source/varnish-4.0.4.tar.gz
+    url = http://varnish-cache.org/_downloads/varnish-4.0.5.tgz
     varnish_version = 4.0
 
 The ``varnish4`` part generates a start script, this can be used together with supervisord.
