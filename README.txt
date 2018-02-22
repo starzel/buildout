@@ -32,15 +32,15 @@ Structure
 
     .. code-block:: ini
 
-        extends = https://raw.githubusercontent.com/starzel/buildout/5.0.9/linkto/base.cfg
+        extends = https://raw.githubusercontent.com/starzel/buildout/5.1/linkto/base.cfg
 
-    This example refers to the tag 5.0.9 of this buildout that uses Plone 5.0.9 To use a different Plone-version simply change that to point to a different tag.
+    This example refers to the tag 5.1 of this buildout that uses Plone 5.1 To use a different Plone-version simply change that to point to a different tag.
 
 ``base.cfg``
     This remote file conatains most of the commonly used logic used for prodcution. It also includes two version-files that are also hosted on github:
 
-    * `pinned_versions.cfg <https://raw.githubusercontent.com/starzel/buildout/5.0.9/linkto/pinned_versions.cfg>`_: Pinns the Plone-version using http://dist.plone.org/release/5.0.9/versions.cfg
-    * `floating_versions.cfg <https://raw.githubusercontent.com/starzel/buildout/5.0.9/linkto/floating_versions.cfg>`_: Pinns all commonly used addons of this buildout.
+    * `pinned_versions.cfg <https://raw.githubusercontent.com/starzel/buildout/5.1/linkto/pinned_versions.cfg>`_: Pinns the Plone-version using http://dist.plone.org/release/5.1/versions.cfg
+    * `floating_versions.cfg <https://raw.githubusercontent.com/starzel/buildout/5.1/linkto/floating_versions.cfg>`_: Pinns all commonly used addons of this buildout.
 
 ``pinned_versions_project.cfg``
     Here you pinn versions to overwrite or extend the hosted ``pinned_versions.cfg``. These eggs are usually pinned for a reason and are usually not safe to be upgraded.
@@ -54,10 +54,7 @@ Versions
 
 We support the following version of Plone:
 
-- `5.1rc2 <https://raw.githubusercontent.com/starzel/buildout/5.1rc2/linkto/base.cfg>`_
-- `5.1rc1 <https://raw.githubusercontent.com/starzel/buildout/5.1rc1/linkto/base.cfg>`_
-- `5.1b4 <https://raw.githubusercontent.com/starzel/buildout/5.1b4/linkto/base.cfg>`_
-- `5.1b3 <https://raw.githubusercontent.com/starzel/buildout/5.1b3/linkto/base.cfg>`_
+- `5.1 <https://raw.githubusercontent.com/starzel/buildout/5.1/linkto/base.cfg>`_
 - `5.0.9 <https://raw.githubusercontent.com/starzel/buildout/5.0.9/linkto/base.cfg>`_
 - `5.0.8 <https://raw.githubusercontent.com/starzel/buildout/5.0.8/linkto/base.cfg>`_
 - `5.0.7 <https://raw.githubusercontent.com/starzel/buildout/5.0.7/linkto/base.cfg>`_
