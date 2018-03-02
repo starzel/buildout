@@ -1,5 +1,5 @@
 setuptools==38.5.1
-zc.buildout==2.11.0
+zc.buildout==2.11.1
 appdirs==1.4.3
 packaging==16.8
 pyparsing==2.2.0
