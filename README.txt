@@ -82,7 +82,10 @@ We support the following version of Plone:
 - `4.2.3 <https://raw.githubusercontent.com/starzel/buildout/4.2.3/linkto/base.cfg>`_
 - `4.2.2 <https://raw.githubusercontent.com/starzel/buildout/4.2.2/linkto/base.cfg>`_
 
-To develop against the current `Coredev <https://github.com/plone/buildout.coredev/tree/5.0>`_ use ``local_coredev.cfg``.
+To use this buildout with a version of Plone that is currently in development (a.k.a. the `Coredev <https://github.com/plone/buildout.coredev/>`_) please use:
+
+- ``local_coredev.cfg`` for `Plone 5.1.x <https://github.com/plone/buildout.coredev/tree/5.1>`
+- ``local_coredev_52.cfg`` for `Plone 5.2.x <https://github.com/plone/buildout.coredev/tree/5.2>`
 
 Please note that new features are not introduced to old versions.
 
