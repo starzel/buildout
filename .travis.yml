@@ -34,7 +34,7 @@ script:
   - bin/buildout -N buildout:download-cache=downloads code-analysis:return-status-codes=True
 # create a package 'project.site' using bobtemplates.plone using mrbob_answers.txt
   - mkdir src
-  - mrbob -O src/project.site --config $HOME/mrbob_answers.txt bobtemplates:plone_addon
+  - mrbob -O src/project.site --config $HOME/mrbob_answers.txt bobtemplates.plone:addon
 # add that package to buildout.cfg in eggs, testeggs, auto-checkout and [sources]
   - sed -i "15i \    project.site" buildout.cfg
   - sed -i "19i \    project.site [test]" buildout.cfg
