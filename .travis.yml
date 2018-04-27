@@ -15,7 +15,7 @@ before_install:
   - echo "package.namespace2 =" >> $HOME/mrbob_answers.txt
   - echo "package.name = site" >> $HOME/mrbob_answers.txt
   - echo "package.description = A Dummy package" >> $HOME/mrbob_answers.txt
-  - echo "package.git.init = n" >> $HOME/mrbob_answers.txt
+  - echo "package.git.disabled = True" >> $HOME/mrbob_answers.txt
   - echo "author.name = Philip Bauer" >> $HOME/mrbob_answers.txt
   - echo "author.email = bauer@starzel.de" >> $HOME/mrbob_answers.txt
   - echo "author.github.user = pbauer" >> $HOME/mrbob_answers.txt
