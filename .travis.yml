@@ -15,6 +15,7 @@ before_install:
   - echo "package.namespace2 =" >> $HOME/mrbob_answers.txt
   - echo "package.name = site" >> $HOME/mrbob_answers.txt
   - echo "package.description = A Dummy package" >> $HOME/mrbob_answers.txt
+  - echo "package.git.init = n" >> $HOME/mrbob_answers.txt
   - echo "author.name = Philip Bauer" >> $HOME/mrbob_answers.txt
   - echo "author.email = bauer@starzel.de" >> $HOME/mrbob_answers.txt
   - echo "author.github.user = pbauer" >> $HOME/mrbob_answers.txt
@@ -27,7 +28,7 @@ install:
   - echo -e "[buildout]\nlogin = admin\npassword = admin" > secret.cfg
   - bin/pip install -r requirements.txt
   - pip install mr.bob
-  - pip install bobtemplates.plone
+  - pip install bobtemplates.plone==3.2.0
   - bin/buildout -N buildout:download-cache=downloads code-analysis:return-status-codes=True annotate
 
 script:
