@@ -185,7 +185,12 @@ Server stack
 ++++++++++++
 
 ``Frontend webserver (Nginx)``
-    The first Nginx manages the virtualhost, does url rewrites if needed and terminates the SSL (needs to be done before varnish). A minimal config cloud be found in the  `demo.plone.de project <https://github.com/collective/demo.plone.de/blob/master/templates/nginx.conf>`_.
+    The first Nginx manages the virtualhost, does url rewrites if needed and terminates the SSL (needs to be done before varnish).
+
+    A full demo-config with ssl and redirects can be found in this repo in `/templates/demo_nginx.conf <https://github.com/starzel/buildout/blob/master/templates/demo_nginx.conf>`_.
+
+    A minimal config without ssl can be found in the `demo.plone.de project <https://github.com/collective/demo.plone.de/blob/master/templates/nginx.conf>`_.
+
     More information can also be found in the `PloneDocs <https://docs.plone.org/manage/deploying/front-end/nginx.html#minimal-nginx-front-end-configuration-for-plone-on-ubuntu-debian-linux>`_
 
 ``Cache (Varnish)``
