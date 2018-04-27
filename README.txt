@@ -276,7 +276,7 @@ This does the vhost routing to the different backends. "my_host" is the upstream
 Build varnish
 +++++++++++++
 
-If you need to build varnish, you need to add ``varnish-build``:
+If you need to build varnish (e.g. because your system does not ship with version 4), you need to add ``varnish-build``:
 
 .. code-block:: ini
 
@@ -289,7 +289,7 @@ If you need to build varnish, you need to add ``varnish-build``:
 
     [varnish-build]
     recipe = plone.recipe.varnish:build
-    url = http://varnish-cache.org/_downloads/varnish-4.0.5.tgz
+    url = https://varnish-cache.org/_downloads/varnish-4.0.5.tgz
     varnish_version = 4.0
 
 The ``varnish4`` part generates a start script, this can be used together with supervisord.
