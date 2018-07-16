@@ -29,9 +29,12 @@ done
 # Rebuild .pot
 $DUDE rebuild-pot --pot $CURRENT_PATH/locales/$CATALOGNAME.pot --create $CATALOGNAME $CURRENT_PATH
 
+# Cleanup comments
+msgattrib --no-wrap --add-location=file -o $CURRENT_PATH/locales/$CATALOGNAME.pot $CURRENT_PATH/locales/$CATALOGNAME.pot
+
 # Compile po files
 for lang in $(find $CURRENT_PATH/locales -mindepth 1 -maxdepth 1 -type d); do
-    
+
     if test -d $lang/LC_MESSAGES; then
 
         PO=$lang/LC_MESSAGES/${dollar}{CATALOGNAME}.po
@@ -42,6 +45,9 @@ for lang in $(find $CURRENT_PATH/locales -mindepth 1 -maxdepth 1 -type d); do
         # Sync po file
         echo "Syncing $PO"
         $DUDE sync --pot $CURRENT_PATH/locales/$CATALOGNAME.pot $PO
+
+        # Cleanup comments
+        msgattrib --no-wrap --add-location=file -o $PO $PO
 
         # Compile .po to .mo
         MO=$lang/LC_MESSAGES/${dollar}{CATALOGNAME}.mo
