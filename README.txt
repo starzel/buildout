@@ -221,7 +221,7 @@ Server stack
     A ``systemctl restart varnish`` should activate the new config. To use one varnish installation with serveral vhosts, see the ``Varnish with multiple sites`` section below.
 
 ``Loadbalancer (Nginx)``
-    Another Nginx spreads the requests to several Zeoclients, here is a minimal config. In production you can look at the `demo.plone.de project <https://github.com/collective/demo.plone.de/blob/master/templates/nginx.conf>`_
+    Another Nginx spreads the requests to several Zeoclients, here is a minimal config. In production you can look at the `demo.plone.de project <https://github.com/collective/demo.plone.de/blob/master/templates/demo.plone.de.conf>`_
 
     .. code-block:: ini
 
