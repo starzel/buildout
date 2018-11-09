@@ -6,8 +6,11 @@ cache:
   directories:
   - eggs
   - downloads
+dist: xenial
 python:
+    - 2.7
     - 3.6
+    - 3.7
 before_install:
   - echo "[variables]" > $HOME/mrbob_answers.txt
   - echo "package.type = Basic" >> $HOME/mrbob_answers.txt
@@ -23,7 +26,9 @@ before_install:
   - echo "plone.version = 5.2a1" >> $HOME/mrbob_answers.txt
 
 install:
-  - `which python3.6` -m venv .
+  - echo `which python`
+  - pip install virtualenv
+  - virtualenv -p `which python` .
   - ln -s local_develop.cfg local.cfg
   - echo -e "[buildout]\nlogin = admin\npassword = admin" > secret.cfg
   - bin/pip install -r requirements.txt
