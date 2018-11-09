@@ -7,7 +7,13 @@ cache:
   - eggs
   - downloads
 python:
-  - 2.7
+#    - 2.7
+    - 3.6
+#matrix:
+#    include:
+#        - python: "3.7"
+#          dist: xenial
+#          sudo: true
 before_install:
   - echo "[variables]" > $HOME/mrbob_answers.txt
   - echo "package.type = Basic" >> $HOME/mrbob_answers.txt
@@ -20,15 +26,15 @@ before_install:
   - echo "author.email = bauer@starzel.de" >> $HOME/mrbob_answers.txt
   - echo "author.github.user = pbauer" >> $HOME/mrbob_answers.txt
   - echo "author.irc = irc.freenode.org#plone" >> $HOME/mrbob_answers.txt
-  - echo "plone.version = 5.1.1" >> $HOME/mrbob_answers.txt
+  - echo "plone.version = 5.2a1" >> $HOME/mrbob_answers.txt
 
 install:
-  - virtualenv -p `which python` .
+  - `which python` -m venv .
   - ln -s local_develop.cfg local.cfg
   - echo -e "[buildout]\nlogin = admin\npassword = admin" > secret.cfg
   - bin/pip install -r requirements.txt
   - pip install mr.bob
-  - pip install bobtemplates.plone==3.2.0
+  - pip install git+https://github.com/plone/bobtemplates.plone.git@python3
   - bin/buildout -N buildout:download-cache=downloads code-analysis:return-status-codes=True annotate
 
 script:
