@@ -29,7 +29,7 @@ before_install:
   - echo "plone.version = 5.2a1" >> $HOME/mrbob_answers.txt
 
 install:
-  - `which python` -m venv .
+  - `which python3.6` -m venv .
   - ln -s local_develop.cfg local.cfg
   - echo -e "[buildout]\nlogin = admin\npassword = admin" > secret.cfg
   - bin/pip install -r requirements.txt
