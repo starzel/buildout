@@ -130,11 +130,17 @@ Symlink to the file that best fits you local environment. At first that is usual
 
     $ ln -s local_develop.cfg local.cfg
 
-Build Plone
+Create a virtualenv in Python 2.7 or Python 3.7 (Plone 5.2 only).
 
 .. code-block:: shell-session
 
-    $ virtualenv-2.7 .
+    $ virtualenv .  # for Python 2.7
+    $ python3.7 -m venv .  # for Python 3 (Plone 5.2 only)
+
+Install and configure Plone
+
+.. code-block:: shell-session
+
     $ ./bin/pip install -r requirements.txt
     $ ./bin/buildout
 
