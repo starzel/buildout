@@ -9,8 +9,6 @@ cache:
 dist: xenial
 python:
     - 2.7
-    - 3.6
-    - 3.7
 before_install:
   - echo "[variables]" > $HOME/mrbob_answers.txt
   - echo "package.type = Basic" >> $HOME/mrbob_answers.txt
