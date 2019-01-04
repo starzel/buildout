@@ -21,7 +21,7 @@ before_install:
   - echo "author.email = bauer@starzel.de" >> $HOME/mrbob_answers.txt
   - echo "author.github.user = pbauer" >> $HOME/mrbob_answers.txt
   - echo "author.irc = irc.freenode.org#plone" >> $HOME/mrbob_answers.txt
-  - echo "plone.version = 5.2a1" >> $HOME/mrbob_answers.txt
+  - echo "plone.version = 4.3.18" >> $HOME/mrbob_answers.txt
 
 install:
   - echo `which python`
