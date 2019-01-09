@@ -62,6 +62,7 @@ We support the following versions of Plone:
 - `5.1.2 <https://raw.githubusercontent.com/starzel/buildout/5.1.2/linkto/base.cfg>`_
 - `5.1.1 <https://raw.githubusercontent.com/starzel/buildout/5.1.1/linkto/base.cfg>`_
 - `5.1 <https://raw.githubusercontent.com/starzel/buildout/5.1/linkto/base.cfg>`_
+- `5.0.10 <https://raw.githubusercontent.com/starzel/buildout/5.0.10/linkto/base.cfg>`_
 - `5.0.9 <https://raw.githubusercontent.com/starzel/buildout/5.0.9/linkto/base.cfg>`_
 - `5.0.8 <https://raw.githubusercontent.com/starzel/buildout/5.0.8/linkto/base.cfg>`_
 - `5.0.7 <https://raw.githubusercontent.com/starzel/buildout/5.0.7/linkto/base.cfg>`_
