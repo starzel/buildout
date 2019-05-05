@@ -1,6 +1,2 @@
-setuptools==40.8.0
+setuptools==41.0.1
 zc.buildout==2.13.1
-appdirs==1.4.3
-packaging==18.0
-pyparsing==2.2.2
-six==1.10.0
