@@ -33,9 +33,8 @@ pip-selfcheck.json
 # local config
 local.cfg
 secret.cfg
+pyvenv.cfg
 
-# Codeintel
-.codeintel
 etc/
 include/
 lib/
