@@ -102,14 +102,14 @@ Versions
 We support the following versions of Plone:
 
 - `5.2 <https://raw.githubusercontent.com/starzel/buildout/5.2/linkto/base.cfg>`_ (Python 2 and 3)
-- `5.2rc5 <https://raw.githubusercontent.com/starzel/buildout/5.2rc5/linkto/base.cfg>`_ (Python 2 and 3)
-- `5.2rc4 <https://raw.githubusercontent.com/starzel/buildout/5.2rc4/linkto/base.cfg>`_ (Python 2 and 3)
-- `5.2rc3 <https://raw.githubusercontent.com/starzel/buildout/5.2rc3/linkto/base.cfg>`_ (Python 2 and 3)
-- `5.2rc2 <https://raw.githubusercontent.com/starzel/buildout/5.2rc2/linkto/base.cfg>`_ (Python 2 and 3)
-- `5.2rc1 <https://raw.githubusercontent.com/starzel/buildout/5.2rc1/linkto/base.cfg>`_ (Python 2 and 3)
-- `5.2b1 <https://raw.githubusercontent.com/starzel/buildout/5.2b1/linkto/base.cfg>`_ (Python 2 and 3)
-- `5.2a2 <https://raw.githubusercontent.com/starzel/buildout/5.2a2/linkto/base.cfg>`_ (Python 2 and 3)
-- `5.2a1 <https://raw.githubusercontent.com/starzel/buildout/5.2a1/linkto/base.cfg>`_ (Python 2 and 3)
+- `5.2rc5 <https://raw.githubusercontent.com/starzel/buildout/5.2rc5/linkto/base.cfg>`_ (Python 2 and 3) *
+- `5.2rc4 <https://raw.githubusercontent.com/starzel/buildout/5.2rc4/linkto/base.cfg>`_ (Python 2 and 3) *
+- `5.2rc3 <https://raw.githubusercontent.com/starzel/buildout/5.2rc3/linkto/base.cfg>`_ (Python 2 and 3) *
+- `5.2rc2 <https://raw.githubusercontent.com/starzel/buildout/5.2rc2/linkto/base.cfg>`_ (Python 2 and 3) *
+- `5.2rc1 <https://raw.githubusercontent.com/starzel/buildout/5.2rc1/linkto/base.cfg>`_ (Python 2 and 3) *
+- `5.2b1 <https://raw.githubusercontent.com/starzel/buildout/5.2b1/linkto/base.cfg>`_ (Python 2 and 3) *
+- `5.2a2 <https://raw.githubusercontent.com/starzel/buildout/5.2a2/linkto/base.cfg>`_ (Python 2 and 3) *
+- `5.2a1 <https://raw.githubusercontent.com/starzel/buildout/5.2a1/linkto/base.cfg>`_ (Python 2 and 3) *
 - `5.1.5 <https://raw.githubusercontent.com/starzel/buildout/5.1.5/linkto/base.cfg>`_
 - `5.1.4 <https://raw.githubusercontent.com/starzel/buildout/5.1.4/linkto/base.cfg>`_
 - `5.1.3 <https://raw.githubusercontent.com/starzel/buildout/5.1.3/linkto/base.cfg>`_
@@ -153,7 +153,7 @@ To use this buildout with a version of Plone that is currently in development (a
 
 Please note that new features are not introduced to old versions.
 
-Tags for development-versions (alpha, beta and rc) will exists but will be removed after the final release of that version.
+* Tags for development-versions (alpha, beta and rc) will exists but will be removed after the final release of that version.
 
 
 
