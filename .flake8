@@ -1,0 +1,5 @@
+[flake8]
+ignore = N814 N802 W503 P001 N806 N803 N815 E501
+max-line-length = 88
+max-complexity = 18
+exclude = docs,*.egg,setup.py,collective.*,plone.*
