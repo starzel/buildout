@@ -3,6 +3,7 @@ Changes
 3.4
 ===
 - Add support for Plone 5.2 and Python 3
+- Refactor code analysis to use pre-commit
 
 3.3
 ===

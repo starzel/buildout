@@ -1,0 +1,9 @@
+repos:
+  - repo: local
+    hooks:
+      - id: code-analysis
+        name: Code analysis
+        entry: bin/code-analysis
+        language: script
+        files: src/(.*)
+        pass_filenames: false

@@ -178,6 +178,12 @@ Symlink to the development-config:
 
 The development-setup will build a simple instance with some useful tools (see below). The setup assumes that zeo, varnish and loadbalancing are only configured on production.
 
+Install git pre-commit hooks using the pre-commit tool that was installed via requirements.txt:
+
+.. code-block:: shell-session
+
+    $ ./bin/pre-commit install
+
 
 Use in production
 -----------------
