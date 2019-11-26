@@ -67,6 +67,12 @@ Install and configure Plone
     $ ./bin/pip install -r requirements.txt
     $ ./bin/buildout
 
+Install git pre-commit hooks
+
+.. code-block:: shell-session
+
+    $ ./bin/pre-commit install
+
 
 Structure
 ---------
@@ -359,8 +365,8 @@ codeintel
 stacktrace
     The part ``stacktrace-script`` adds a bash-script ``./bin/stack.sh`` that will print the current stacktrace to stdout. Useful to find out what Plone is doing when it's busy.
 
-code-analysis
-    This installs a pre-commit-hook that runs the codeanalysis-tests from ``plone.recipe.codeanalysis``.
+pre-commit
+    This installs a pre-commit-hook that runs several code analysis tests including black.
 
 mrbob
     This part adds `bobtemplates.plone <https://github.com/collective/bobtemplates.plone>`_ to simplify the creation of new addons.
