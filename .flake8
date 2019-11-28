@@ -1,0 +1,5 @@
+[flake8]
+ignore =
+max-line-length = 88
+max-complexity = 18
+exclude = docs,*.egg,setup.py,collective.*,plone.*

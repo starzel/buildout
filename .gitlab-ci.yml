@@ -4,5 +4,5 @@ before_script:
 job1:
   script:
      - export DISPLAY=:99
-     - ./bin/code-analysis
+     - ./bin/pre-commit run -a
      - ./bin/test
