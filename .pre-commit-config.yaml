@@ -5,7 +5,16 @@ repos:
       - id: black
         language_version: python 3.7
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v2.4.0
+    rev: v3.1.0
+    hooks:
+      - id: debug-statements
+      - id: fix-encoding-pragma
+      - id: check-xml
+      - id: check-added-large-files
+      - id: check-merge-conflict
+      - id: double-quote-string-fixer
+  - repo: https://gitlab.com/pycqa/flake8
+    rev: '3.8.3'
     hooks:
       - id: flake8
         args: [--config=.flake8]
@@ -18,12 +27,6 @@ repos:
           - pep8-naming
           - flake8-mutable
           - flake8-tidy-imports
-      - id: debug-statements
-      - id: fix-encoding-pragma
-      - id: check-xml
-      - id: check-added-large-files
-      - id: check-merge-conflict
-      - id: double-quote-string-fixer
   - repo: https://github.com/pre-commit/mirrors-isort
     rev: v4.3.21
     hooks:
