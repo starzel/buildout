@@ -25,6 +25,7 @@ before_install:
   - echo "author.github.user = pbauer" >> $HOME/mrbob_answers.txt
   - echo "plone.version = 5.2" >> $HOME/mrbob_answers.txt
   - echo "python.version = 3.7" >> $HOME/mrbob_answers.txt
+  - echo "vscode_support = False" >> $HOME/mrbob_answers.txt
 
 install:
   - echo `which python`
