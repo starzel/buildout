@@ -358,6 +358,8 @@ codeintel
 stacktrace
     The part ``stacktrace-script`` adds a bash-script ``./bin/stack.sh`` that will print the current stacktrace to stdout. Useful to find out what Plone is doing when it's busy.
 
+    This was removed in 5.2.2 because it only works with ZServer (i.e. in Python 2). Use https://pypi.org/project/py-spy/ instead.
+
 pre-commit
     This installs a pre-commit-hook that runs several code analysis tests including black.
 
