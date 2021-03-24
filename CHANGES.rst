@@ -4,6 +4,7 @@ Changes
 ===
 - Add support for Plone 5.2 and Python 3
 - Refactor code analysis to use pre-commit
+- Remove haproxy, use hginx as load balancer.
 
 3.3
 ===
