@@ -5,6 +5,7 @@ Changes
 - Add support for Plone 5.2 and Python 3
 - Refactor code analysis to use pre-commit
 - Remove haproxy, use hginx as load balancer.
+- Update varnish config.
 
 3.3
 ===

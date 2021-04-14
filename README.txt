@@ -235,20 +235,20 @@ Server stack
         # comment out what you need
         parts += # Choose one!
         ...
-        varnish4-config
+        varnish-config
         ...
 
-    Take a look in ``linkto/base.cfg`` for the varnish4-config part, there are several switches to configure.
+    Take a look in ``linkto/base.cfg`` for the varnish-config part, there are several switches to configure.
 
     It is best practice to install varnish from your distribution repository. If this is not possible you can build it, see the section below.
 
-    If you use the system-varnish only need the ``[varnish4-config]`` part, it will generate the config (vcl) for you. In ``/etc/varnish/default.vcl`` include the generated vcl:
+    If you use the system-varnish only need the ``[varnish-config]`` part, it will generate the config (vcl) for you. In ``/etc/varnish/default.vcl`` include the generated vcl:
 
     .. code-block:: ini
 
         vcl 4.0;
 
-        include "<path to your buildout>/etc/varnish4.vcl";
+        include "<path to your buildout>/etc/varnish.vcl";
 
     A ``systemctl restart varnish`` should activate the new config. To use one varnish installation with serveral vhosts, see the ``Varnish with multiple sites`` section below.
 
@@ -274,7 +274,7 @@ Varnish with multiple sites
 
 The generated varnish config works with a single vhost, for multiple sites/domains we need a custom varnish config. This configuration is not yet build into the buildout script/template, we need to do the changes manually in a copy of a varnish config file (just copy the varnis4.vcl over to /etc/varnish and include it in default.vcl).
 
-In the varnish4.vcl we need to add the additional backend, note the different loadbalancer port.
+In the varnish.vcl we need to add the additional backend, note the different loadbalancer port.
 
 .. code-block:: ini
 
@@ -326,7 +326,7 @@ If you need to build varnish (e.g. because your system does not ship with versio
     url = https://varnish-cache.org/_downloads/varnish-4.0.5.tgz
     varnish_version = 4.0
 
-The ``varnish4`` part generates a start script, this can be used together with supervisord.
+The ``varnish`` part generates a start script, this can be used together with supervisord.
 
 
 Use for test-instances
