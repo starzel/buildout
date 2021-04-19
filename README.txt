@@ -373,12 +373,6 @@ i18n
 Restrict loaded languages
     By default only german ('de') is loaded on startup. In your ``buildout.cfg`` you can override the loaded languages using ``language = de en fr``. This setting also affects the languages used in the ``i18nize-xxx`` part. (see http://maurits.vanrees.org/weblog/archive/2010/10/i18n-plone-4#restrict-the-loaded-languages)
 
-i18nize-diff
-    Show differences of the po files against what is currently in git.
-    This script uses `podiff <https://pypi.python.org/pypi/podiff>`_ that filters out a lot of noise like creation dates and line numbers.
-    So this output is much more usable.
-    Use this script in jenkins together with i18nize-all to make sure that you po files are up to date.
-
 i18nize-xxx
     Modify the commented-out part ``i18nize-xxx`` to get a script that runs i18ndude fro an egg. Here is an example for the egg ``dynajet.site`` adding a script ``./bin/i18nize-site``.
 
