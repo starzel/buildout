@@ -206,12 +206,17 @@ In ``local_production.cfg`` select the parts you really need.
 .. code-block:: ini
 
     parts +=
-        ${buildout:zeo-multi-parts}
+        zeoserver
+        zeoclient1
+        zeoclient2
+        zeoclient_debug
         ${buildout:varnish}
         ${buildout:supervisor-parts}
         ${buildout:cron-parts}
+        backup
         logrotate
         precompiler
+        nginx-conf
 
 Also modify ``templates/supervisord.conf`` to have supervisor manage the parts you want to use.
 
