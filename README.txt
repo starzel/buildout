@@ -216,7 +216,7 @@ In ``local_production.cfg`` select the parts you really need.
         backup
         logrotate
         precompiler
-        nginx-conf
+        nginx-config
 
 Also modify ``templates/supervisord.conf`` to have supervisor manage the parts you want to use.
 
