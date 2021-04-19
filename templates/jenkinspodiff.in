@@ -1,2 +1,0 @@
-#!/usr/bin/env bash
-( ! ./bin/podiff_all | egrep -v '(^Index: .*)|(^=*$)|(^--- repository)|(^\+\+\+ working copy)' | egrep -v '(^Index: .*)|(^=*$)|(^--- repository)|(^\+\+\+ working copy)' )
