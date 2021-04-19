@@ -1,8 +1,0 @@
-#!/bin/sh
-exec ${varnish:daemon} \
-    -f "${varnish:config}" \
-    -P "${varnish:pid}" \
-    -a ${varnish:bind} \
-    -s file,"${varnish:storagefile}",512M \
-    -F \
-    "$@"

@@ -210,9 +210,9 @@ In ``local_production.cfg`` select the parts you really need.
         zeoclient1
         zeoclient2
         zeoclient_debug
-        ${buildout:varnish}
         ${buildout:supervisor-parts}
         ${buildout:cron-parts}
+        varnish-config
         backup
         logrotate
         precompiler
@@ -315,23 +315,8 @@ This does the vhost routing to the different backends. "my_host" is the upstream
 Build varnish
 +++++++++++++
 
-If you need to build varnish (e.g. because your system does not ship with version 4), you need to add ``varnish-build``:
-
-.. code-block:: ini
-
-    # comment out what you need
-    parts +=
-    [...]
-    ${buildout:varnish}
-    varnish-build
-    [...]
-
-    [varnish-build]
-    recipe = plone.recipe.varnish:build
-    url = https://varnish-cache.org/_downloads/varnish-4.0.5.tgz
-    varnish_version = 4.0
-
-The ``varnish`` part generates a start script, this can be used together with supervisord.
+If you need to build varnish (e.g. because your system does not ship with the
+version you need), see `plone.recipe.varnish <https://github.com/collective/plone.recipe.varnish/>`_.
 
 
 Use for test-instances
