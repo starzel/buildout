@@ -209,7 +209,6 @@ In ``local_production.cfg`` select the parts you really need.
         zeoserver
         ${zeoclients}
         zeoclient_debug
-        ${buildout:supervisor-parts}
         ${buildout:cron-parts}
         varnish-config
         backup
@@ -227,7 +226,6 @@ the main systemd service for the site.
     zeoclients +=
         zeoclient2
 
-Also modify ``templates/supervisord.conf`` to have supervisor manage the parts you want to use.
 
 Server stack
 ++++++++++++
@@ -432,11 +430,3 @@ Notes
 ``local.cfg`` and ``secret.cfg`` must **never** be versioned. The file ``.gitignore`` in this buildout already prevent this.
 
 It might feels weird that ``buildout.cfg`` loads ``local.cfg``, but this avoids some weird behavior of buildouts extends-feature.
-
-
-To have different supervisor-configurations for test-servers by adding a file ``templates/supervisord-test.conf`` and referencing it in local_test.cfg:
-
-.. code-block:: ini
-
-    [supervisor-conf]
-        input= ${buildout:directory}/templates/supervisord-test.conf
