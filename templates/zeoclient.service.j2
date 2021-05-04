@@ -1,0 +1,23 @@
+[Unit]
+Description={{ basename }}
+After={{ parts.site_unit.zeoserver_name }}.service
+BindsTo={{ parts.site_unit.zeoserver_name }}.service
+PartOf={{ parts.site_unit.basename }}.service
+Before={{ parts.site_unit.basename }}.service
+
+[Service]
+Type=simple
+WorkingDirectory={{ parts.buildout.directory }}
+ExecStart={{ parts.site_unit.run_sh }} {{ parts.buildout['bin-directory'] }}/%i console
+{%- if parts.buildout['service-user'] %}
+User={{ parts.buildout['service-user'] }}
+{%- endif %}
+{%- if parts.buildout['service-group'] %}
+Group={{ parts.buildout['service-group'] }}
+{%- endif %}
+LimitNOFILE=64000
+LimitNPROC=64173
+LimitSIGPENDING=64173
+PermissionsStartOnly=true
+MemoryMax=1.5G
+Restart=on-failure

@@ -1,0 +1,15 @@
+[Unit]
+Description={{ basename }}
+After=network.target
+PartOf={{ parts.site_unit.basename }}.service
+Before={{ parts.site_unit.basename }}.service
+
+[Service]
+Type=simple
+WorkingDirectory={{ parts.buildout.directory }}
+ExecStart={{ parts.site_unit.run_sh }} {{ parts.buildout['bin-directory'] }}/zeoserver fg
+LimitNOFILE=64000
+LimitNPROC=64173
+LimitSIGPENDING=64173
+PermissionsStartOnly=true
+Restart=on-failure

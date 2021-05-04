@@ -207,8 +207,7 @@ In ``local_production.cfg`` select the parts you really need.
 
     parts +=
         zeoserver
-        zeoclient1
-        zeoclient2
+        ${zeoclients}
         zeoclient_debug
         ${buildout:supervisor-parts}
         ${buildout:cron-parts}
@@ -217,6 +216,16 @@ In ``local_production.cfg`` select the parts you really need.
         logrotate
         precompiler
         nginx-config
+        site_unit
+
+If you add any zeoclients, also add their partnames to buildout:zeoclients.
+This is a list used in several places, e.g. to populate the dependencies of
+the main systemd service for the site.
+
+.. code-block:: ini
+
+    zeoclients +=
+        zeoclient2
 
 Also modify ``templates/supervisord.conf`` to have supervisor manage the parts you want to use.
 
@@ -431,4 +440,3 @@ To have different supervisor-configurations for test-servers by adding a file ``
 
     [supervisor-conf]
         input= ${buildout:directory}/templates/supervisord-test.conf
-
