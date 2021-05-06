@@ -206,14 +206,26 @@ In ``local_production.cfg`` select the parts you really need.
 .. code-block:: ini
 
     parts +=
-        ${buildout:zeo-multi-parts}
-        ${buildout:varnish}
-        ${buildout:supervisor-parts}
+        zeoserver
+        ${zeoclients}
+        zeoclient_debug
         ${buildout:cron-parts}
+        varnish-config
+        backup
         logrotate
         precompiler
+        nginx-config
+        site_unit
 
-Also modify ``templates/supervisord.conf`` to have supervisor manage the parts you want to use.
+If you add any zeoclients, also add their partnames to buildout:zeoclients.
+This is a list used in several places, e.g. to populate the dependencies of
+the main systemd service for the site.
+
+.. code-block:: ini
+
+    zeoclients +=
+        zeoclient2
+
 
 Server stack
 ++++++++++++
@@ -310,23 +322,8 @@ This does the vhost routing to the different backends. "my_host" is the upstream
 Build varnish
 +++++++++++++
 
-If you need to build varnish (e.g. because your system does not ship with version 4), you need to add ``varnish-build``:
-
-.. code-block:: ini
-
-    # comment out what you need
-    parts +=
-    [...]
-    ${buildout:varnish}
-    varnish-build
-    [...]
-
-    [varnish-build]
-    recipe = plone.recipe.varnish:build
-    url = https://varnish-cache.org/_downloads/varnish-4.0.5.tgz
-    varnish_version = 4.0
-
-The ``varnish`` part generates a start script, this can be used together with supervisord.
+If you need to build varnish (e.g. because your system does not ship with the
+version you need), see `plone.recipe.varnish <https://github.com/collective/plone.recipe.varnish/>`_.
 
 
 Use for test-instances
@@ -383,12 +380,6 @@ i18n
 Restrict loaded languages
     By default only german ('de') is loaded on startup. In your ``buildout.cfg`` you can override the loaded languages using ``language = de en fr``. This setting also affects the languages used in the ``i18nize-xxx`` part. (see http://maurits.vanrees.org/weblog/archive/2010/10/i18n-plone-4#restrict-the-loaded-languages)
 
-i18nize-diff
-    Show differences of the po files against what is currently in git.
-    This script uses `podiff <https://pypi.python.org/pypi/podiff>`_ that filters out a lot of noise like creation dates and line numbers.
-    So this output is much more usable.
-    Use this script in jenkins together with i18nize-all to make sure that you po files are up to date.
-
 i18nize-xxx
     Modify the commented-out part ``i18nize-xxx`` to get a script that runs i18ndude fro an egg. Here is an example for the egg ``dynajet.site`` adding a script ``./bin/i18nize-site``.
 
@@ -439,12 +430,3 @@ Notes
 ``local.cfg`` and ``secret.cfg`` must **never** be versioned. The file ``.gitignore`` in this buildout already prevent this.
 
 It might feels weird that ``buildout.cfg`` loads ``local.cfg``, but this avoids some weird behavior of buildouts extends-feature.
-
-
-To have different supervisor-configurations for test-servers by adding a file ``templates/supervisord-test.conf`` and referencing it in local_test.cfg:
-
-.. code-block:: ini
-
-    [supervisor-conf]
-        input= ${buildout:directory}/templates/supervisord-test.conf
-

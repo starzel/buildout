@@ -1,0 +1,17 @@
+# Use this systemd service for managing all parts of the applicatoin on the
+# system. It acts as a systemd target, but we are using a service since
+# targets cannot be reloaded.
+
+[Unit]
+Description={{ name }}
+After=network.target
+Requires={{ zeoserver_name }}.service
+{%- for zeoclient in parts.buildout.zeoclients | split %}
+Wants={{ zeoclient_name }}@{{ zeoclient }}.service
+{%- endfor %}
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/env true
+ExecReload=/usr/bin/env true
+RemainAfterExit=on
