@@ -1,5 +1,9 @@
 Changes
 
+3.5
+===
+- Remove temporarystorage for Plone 6.0 (local_coredev.cfg)
+
 3.4
 ===
 - Add support for Plone 5.2 and Python 3
