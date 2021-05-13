@@ -8,6 +8,12 @@ Before={{ parts.site_unit.basename }}.service
 Type=simple
 WorkingDirectory={{ parts.buildout.directory }}
 ExecStart={{ parts.site_unit.run_sh }} {{ parts.buildout['bin-directory'] }}/zeoserver fg
+{%- if parts.buildout['service-user'] %}
+User={{ parts.buildout['service-user'] }}
+{%- endif %}
+{%- if parts.buildout['service-group'] %}
+Group={{ parts.buildout['service-group'] }}
+{%- endif %}
 LimitNOFILE=64000
 LimitNPROC=64173
 LimitSIGPENDING=64173

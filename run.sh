@@ -15,6 +15,10 @@
 # service programs are probably tested in during development. When systemd
 # runs a service, though, there is no login shell involved to begin with.
 #
+# Note: When running a user service, the user's environment might already be
+# sourced; it's not clear to me at the time of writing whether this is
+# guaranteed behaviour. Let's assume for now that we'd better take care of it.
+#
 # The obvious solution is to run the service as the command passed to a login
 # shell. However, we don't make any assumptions here about what system this
 # buildout configuration will be used on. Therefore we can only rely on
