@@ -212,7 +212,6 @@ In ``local_production.cfg`` select the parts you really need.
         ${buildout:cron-parts}
         varnish-config
         backup
-        logrotate
         precompiler
         nginx-config
         site_unit
