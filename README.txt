@@ -33,7 +33,7 @@ Remove all files that are not needed for a project but are only used for the bui
 
 .. code-block:: bash
 
-    rm -rf linkto README.rst README.txt .travis.yml secret.cfg_tmpl VERSION.txt local_coredev.cfg CHANGES.rst
+    rm -rf linkto README.rst README.txt .travis.yml VERSION.txt local_coredev.cfg CHANGES.rst
 
 If you're not developing the buildout itself you want a create a new git repo.
 
