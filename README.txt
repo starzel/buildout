@@ -26,52 +26,52 @@ Quickstart
 
 .. code-block:: shell-session
 
-    $ git clone https://github.com/starzel/buildout SOME_PROJECT
-    $ cd SOME_PROJECT
+    git clone https://github.com/starzel/buildout SOME_PROJECT
+    cd SOME_PROJECT
 
 Remove all files that are not needed for a project but are only used for the buildout itself.
 
 .. code-block:: shell-session
 
-    $ rm -rf linkto README.rst README.txt .travis.yml secret.cfg_tmpl VERSION.txt local_coredev.cfg CHANGES.rst
+    rm -rf linkto README.rst README.txt .travis.yml secret.cfg_tmpl VERSION.txt local_coredev.cfg CHANGES.rst
 
 If you're not developing the buildout itself you want a create a new git repo.
 
 .. code-block:: shell-session
 
-    $ rm -rf .git && git init
+    rm -rf .git && git init
 
 Add a file that contains a passwort. Do **not** use ``admin`` as a password in production!
 
 .. code-block:: shell-session
 
-    $ echo -e "[buildout]\nlogin = admin\npassword = admin" > secret.cfg
+    echo -e "[buildout]\nlogin = admin\npassword = admin" > secret.cfg
 
 Symlink to the file that best fits you local environment. At first that is usually development. Later you can use production or test. This buildout only uses ``local.cfg`` and ignores all ``local_*.cfg``.
 
 .. code-block:: shell-session
 
-    $ ln -s local_develop.cfg local.cfg
+    ln -s local_develop.cfg local.cfg
 
 Create a virtualenv in Python 2.7 or Python 3.7 (Plone 5.2 only).
 
 .. code-block:: shell-session
 
-    $ virtualenv .  # for Python 2.7
-    $ python3.7 -m venv .  # for Python 3 (Plone 5.2 only)
+    virtualenv .  # for Python 2.7
+    python3.7 -m venv .  # for Python 3 (Plone 5.2 only)
 
 Install and configure Plone
 
 .. code-block:: shell-session
 
-    $ ./bin/pip install -r requirements.txt
-    $ ./bin/buildout
+    ./bin/pip install -r requirements.txt
+    ./bin/buildout
 
 Install git pre-commit hooks
 
 .. code-block:: shell-session
 
-    $ ./bin/pre-commit install
+    ./bin/pre-commit install
 
 
 Structure
@@ -177,7 +177,7 @@ Symlink to the development-config:
 
 .. code-block:: shell-session
 
-    $ ln -s local_develop.cfg local.cfg
+    ln -s local_develop.cfg local.cfg
 
 The development-setup will build a simple instance with some useful tools (see below). The setup assumes that zeo, varnish and loadbalancing are only configured on production.
 
@@ -185,7 +185,7 @@ Install git pre-commit hooks using the pre-commit tool that was installed via re
 
 .. code-block:: shell-session
 
-    $ ./bin/pre-commit install
+    ./bin/pre-commit install
 
 
 Use in production
@@ -195,7 +195,7 @@ Symlink to the production-config:
 
 .. code-block:: shell-session
 
-    $ ln -s local_production.cfg local.cfg
+    ln -s local_production.cfg local.cfg
 
 A average project could use this stack pipeline::
 
