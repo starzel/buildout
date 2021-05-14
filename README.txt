@@ -243,15 +243,16 @@ Server stack
 
     .. code-block:: ini
 
-        # comment out what you need
-        parts += # Choose one!
-        ...
-        varnish-config
-        ...
+        parts +=
+            ...
+            varnish-config
+            ...
 
     Take a look in ``linkto/base.cfg`` for the varnish-config part, there are several switches to configure.
 
-    It is best practice to install varnish from your distribution repository. If this is not possible you can build it, see the section below.
+    It is best practice to install varnish from your distribution repository.
+    If you need to build varnish (e.g. because your system does not ship with the version you need), see `plone.recipe.varnish <https://github.com/collective/plone.recipe.varnish#build-varnish-from-sources/>`_.
+    The same recipe that we use to configure varnish can also be used to build it.
 
     If you use the system-varnish only need the ``[varnish-config]`` part, it will generate the config (vcl) for you. In ``/etc/varnish/default.vcl`` include the generated vcl:
 
@@ -318,11 +319,6 @@ In ``sub vcl_recv`` we remove the backend (set req.backend_hint = backend_000;) 
 
 This does the vhost routing to the different backends. "my_host" is the upstream name of the cache, see the config of `demo.plone.de project <https://github.com/collective/demo.plone.de/blob/master/templates/nginx.conf>`_. The Varnish config can be tested with this command: ``varnishd -C -f /etc/varnish/default.vcl``
 
-Build varnish
-+++++++++++++
-
-If you need to build varnish (e.g. because your system does not ship with the
-version you need), see `plone.recipe.varnish <https://github.com/collective/plone.recipe.varnish/>`_.
 
 
 Use for test-instances
@@ -351,9 +347,6 @@ zopepy
 
 checkversions
     Run ``./bin/checkversions floating_versions_project.cfg`` to check if your pinned eggs are up-to-date.
-
-codeintel
-    This part uses ``corneti.recipes.codeintel`` to prepare for codeintel-integration (useful for users of Sublime Text).
 
 stacktrace
     The part ``stacktrace-script`` adds a bash-script ``./bin/stack.sh`` that will print the current stacktrace to stdout. Useful to find out what Plone is doing when it's busy.
@@ -401,8 +394,8 @@ i18nize-all
 Testing
 +++++++
 
-Setup for gitlab-ci and jenkins
-    Configure your ci-system to run the script ``./bootstrap_ci.sh``. This will configure and run the whole buildout.
+Setup for gitlab-ci
+    The config ``local_ci.cfg`` can be used by your ci-system to run the buildout.
 
 
 Deployment
@@ -418,7 +411,7 @@ Sentry logging
 Hotfixes
 ++++++++
 
-This buildout automatically includes the correct Hotfixes for the version of Plone you use. E.g. the extends-file for Plone 5.0.6 https://raw.githubusercontent.com/starzel/buildout/5.0.6/linkto/base.cfg  pulls in the file https://raw.githubusercontent.com/starzel/buildout/master/linkto/hotfixes/5.0.6.cfg which in turn contains the pinns and eggs for all HotFixes for that version.
+This buildout automatically includes the correct Hotfixes for the version of Plone you use. E.g. the extends-file for Plone 5.0.6 https://raw.githubusercontent.com/starzel/buildout/5.0.6/linkto/base.cfg pulls in the file https://raw.githubusercontent.com/starzel/buildout/master/linkto/hotfixes/5.0.6.cfg which in turn contains the pinns and eggs for all HotFixes for that version.
 
 By having the hotfixes-files in the master-branch we can easily update Hotfixes for each version without having to move any tags. The same day a Hotfix is published the corresponding extends-files will be updated. You simply have to rerun buildout and restart your site to include them.
 
@@ -428,4 +421,4 @@ Notes
 
 ``local.cfg`` and ``secret.cfg`` must **never** be versioned. The file ``.gitignore`` in this buildout already prevent this.
 
-It might feels weird that ``buildout.cfg`` loads ``local.cfg``, but this avoids some weird behavior of buildouts extends-feature.
+It might feel weird that ``buildout.cfg`` loads ``local.cfg``, but this avoids some weird behavior of buildouts extends-feature.
