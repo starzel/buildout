@@ -216,6 +216,12 @@ In ``local_production.cfg`` select the parts you really need.
         nginx-config
         site_unit
 
+Note that ``site_unit`` is a part that creates a systemd service unit which
+pulls in service units for zeoserver and any zeoclients you set up (see
+below). Starting, restarting and stopping the site unit will start, restart
+and stop, resp., the zeoserver and zeoclients. The site unit is the only
+systemd unit in the deployment that needs to be enabled or disabled.
+
 If you add any zeoclients, also add their partnames to buildout:zeoclients.
 This is a list used in several places, e.g. to populate the dependencies of
 the main systemd service for the site.
@@ -225,6 +231,11 @@ the main systemd service for the site.
     zeoclients +=
         zeoclient2
 
+A note on the execution environment of the processes: In order to have
+zeoserver and zeoclients run in the environment of the service user they run
+as, the systemd services need to be executed by a shell that has those
+environments loaded. This is what the ``run.sh`` script is about; see the
+comments within the script for details.
 
 Server stack
 ++++++++++++
