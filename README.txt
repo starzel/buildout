@@ -24,54 +24,54 @@ Main features
 Quickstart
 ----------
 
-.. code-block:: shell-session
+.. code-block:: bash
 
-    $ git clone https://github.com/starzel/buildout SOME_PROJECT
-    $ cd SOME_PROJECT
+    git clone https://github.com/starzel/buildout SOME_PROJECT
+    cd SOME_PROJECT
 
 Remove all files that are not needed for a project but are only used for the buildout itself.
 
-.. code-block:: shell-session
+.. code-block:: bash
 
-    $ rm -rf linkto README.rst README.txt .travis.yml secret.cfg_tmpl VERSION.txt local_coredev.cfg CHANGES.rst
+    rm -rf linkto README.rst README.txt .travis.yml VERSION.txt local_coredev.cfg CHANGES.rst
 
 If you're not developing the buildout itself you want a create a new git repo.
 
-.. code-block:: shell-session
+.. code-block:: bash
 
-    $ rm -rf .git && git init
+    rm -rf .git && git init
 
 Add a file that contains a passwort. Do **not** use ``admin`` as a password in production!
 
-.. code-block:: shell-session
+.. code-block:: bash
 
-    $ echo -e "[buildout]\nlogin = admin\npassword = admin" > secret.cfg
+    echo -e "[buildout]\nlogin = admin\npassword = admin" > secret.cfg
 
 Symlink to the file that best fits you local environment. At first that is usually development. Later you can use production or test. This buildout only uses ``local.cfg`` and ignores all ``local_*.cfg``.
 
-.. code-block:: shell-session
+.. code-block:: bash
 
-    $ ln -s local_develop.cfg local.cfg
+    ln -s local_develop.cfg local.cfg
 
 Create a virtualenv in Python 2.7 or Python 3.7 (Plone 5.2 only).
 
-.. code-block:: shell-session
+.. code-block:: bash
 
-    $ virtualenv .  # for Python 2.7
-    $ python3.7 -m venv .  # for Python 3 (Plone 5.2 only)
+    virtualenv .  # for Python 2.7
+    python3.7 -m venv .  # for Python 3 (Plone 5.2 only)
 
 Install and configure Plone
 
-.. code-block:: shell-session
+.. code-block:: bash
 
-    $ ./bin/pip install -r requirements.txt
-    $ ./bin/buildout
+    ./bin/pip install -r requirements.txt
+    ./bin/buildout
 
 Install git pre-commit hooks
 
-.. code-block:: shell-session
+.. code-block:: bash
 
-    $ ./bin/pre-commit install
+    ./bin/pre-commit install
 
 
 Structure
@@ -175,17 +175,17 @@ Use in development
 
 Symlink to the development-config:
 
-.. code-block:: shell-session
+.. code-block:: bash
 
-    $ ln -s local_develop.cfg local.cfg
+    ln -s local_develop.cfg local.cfg
 
 The development-setup will build a simple instance with some useful tools (see below). The setup assumes that zeo, varnish and loadbalancing are only configured on production.
 
 Install git pre-commit hooks using the pre-commit tool that was installed via requirements.txt:
 
-.. code-block:: shell-session
+.. code-block:: bash
 
-    $ ./bin/pre-commit install
+    ./bin/pre-commit install
 
 
 Use in production
@@ -193,9 +193,9 @@ Use in production
 
 Symlink to the production-config:
 
-.. code-block:: shell-session
+.. code-block:: bash
 
-    $ ln -s local_production.cfg local.cfg
+    ln -s local_production.cfg local.cfg
 
 A average project could use this stack pipeline::
 
@@ -206,14 +206,36 @@ In ``local_production.cfg`` select the parts you really need.
 .. code-block:: ini
 
     parts +=
-        ${buildout:zeo-multi-parts}
-        ${buildout:varnish}
-        ${buildout:supervisor-parts}
+        zeoserver
+        ${buildout:zeoclients}
+        zeoclient_debug
         ${buildout:cron-parts}
-        logrotate
+        varnish-config
+        backup
         precompiler
+        nginx-config
+        site_unit
 
-Also modify ``templates/supervisord.conf`` to have supervisor manage the parts you want to use.
+Note that ``site_unit`` is a part that creates a systemd service unit which
+pulls in service units for zeoserver and any zeoclients you set up (see
+below). Starting, restarting and stopping the site unit will start, restart
+and stop, resp., the zeoserver and zeoclients. The site unit is the only
+systemd unit in the deployment that needs to be enabled or disabled.
+
+If you add any zeoclients, also add their partnames to buildout:zeoclients.
+This is a list used in several places, e.g. to populate the dependencies of
+the main systemd service for the site.
+
+.. code-block:: ini
+
+    zeoclients +=
+        zeoclient2
+
+A note on the execution environment of the processes: In order to have
+zeoserver and zeoclients run in the environment of the service user they run
+as, the systemd services need to be executed by a shell that has those
+environments loaded. This is what the ``run.sh`` script is about; see the
+comments within the script for details.
 
 Server stack
 ++++++++++++
@@ -232,15 +254,16 @@ Server stack
 
     .. code-block:: ini
 
-        # comment out what you need
-        parts += # Choose one!
-        ...
-        varnish-config
-        ...
+        parts +=
+            ...
+            varnish-config
+            ...
 
     Take a look in ``linkto/base.cfg`` for the varnish-config part, there are several switches to configure.
 
-    It is best practice to install varnish from your distribution repository. If this is not possible you can build it, see the section below.
+    It is best practice to install varnish from your distribution repository.
+    If you need to build varnish (e.g. because your system does not ship with the version you need), see `plone.recipe.varnish <https://github.com/collective/plone.recipe.varnish#build-varnish-from-sources/>`_.
+    The same recipe that we use to configure varnish can also be used to build it.
 
     If you use the system-varnish only need the ``[varnish-config]`` part, it will generate the config (vcl) for you. In ``/etc/varnish/default.vcl`` include the generated vcl:
 
@@ -307,26 +330,6 @@ In ``sub vcl_recv`` we remove the backend (set req.backend_hint = backend_000;) 
 
 This does the vhost routing to the different backends. "my_host" is the upstream name of the cache, see the config of `demo.plone.de project <https://github.com/collective/demo.plone.de/blob/master/templates/nginx.conf>`_. The Varnish config can be tested with this command: ``varnishd -C -f /etc/varnish/default.vcl``
 
-Build varnish
-+++++++++++++
-
-If you need to build varnish (e.g. because your system does not ship with version 4), you need to add ``varnish-build``:
-
-.. code-block:: ini
-
-    # comment out what you need
-    parts +=
-    [...]
-    ${buildout:varnish}
-    varnish-build
-    [...]
-
-    [varnish-build]
-    recipe = plone.recipe.varnish:build
-    url = https://varnish-cache.org/_downloads/varnish-4.0.5.tgz
-    varnish_version = 4.0
-
-The ``varnish`` part generates a start script, this can be used together with supervisord.
 
 
 Use for test-instances
@@ -356,9 +359,6 @@ zopepy
 checkversions
     Run ``./bin/checkversions floating_versions_project.cfg`` to check if your pinned eggs are up-to-date.
 
-codeintel
-    This part uses ``corneti.recipes.codeintel`` to prepare for codeintel-integration (useful for users of Sublime Text).
-
 stacktrace
     The part ``stacktrace-script`` adds a bash-script ``./bin/stack.sh`` that will print the current stacktrace to stdout. Useful to find out what Plone is doing when it's busy.
 
@@ -383,12 +383,6 @@ i18n
 Restrict loaded languages
     By default only german ('de') is loaded on startup. In your ``buildout.cfg`` you can override the loaded languages using ``language = de en fr``. This setting also affects the languages used in the ``i18nize-xxx`` part. (see http://maurits.vanrees.org/weblog/archive/2010/10/i18n-plone-4#restrict-the-loaded-languages)
 
-i18nize-diff
-    Show differences of the po files against what is currently in git.
-    This script uses `podiff <https://pypi.python.org/pypi/podiff>`_ that filters out a lot of noise like creation dates and line numbers.
-    So this output is much more usable.
-    Use this script in jenkins together with i18nize-all to make sure that you po files are up to date.
-
 i18nize-xxx
     Modify the commented-out part ``i18nize-xxx`` to get a script that runs i18ndude fro an egg. Here is an example for the egg ``dynajet.site`` adding a script ``./bin/i18nize-site``.
 
@@ -411,8 +405,8 @@ i18nize-all
 Testing
 +++++++
 
-Setup for gitlab-ci and jenkins
-    Configure your ci-system to run the script ``./bootstrap_ci.sh``. This will configure and run the whole buildout.
+Setup for gitlab-ci
+    The config ``local_ci.cfg`` can be used by your ci-system to run the buildout.
 
 
 Deployment
@@ -428,7 +422,7 @@ Sentry logging
 Hotfixes
 ++++++++
 
-This buildout automatically includes the correct Hotfixes for the version of Plone you use. E.g. the extends-file for Plone 5.0.6 https://raw.githubusercontent.com/starzel/buildout/5.0.6/linkto/base.cfg  pulls in the file https://raw.githubusercontent.com/starzel/buildout/master/linkto/hotfixes/5.0.6.cfg which in turn contains the pinns and eggs for all HotFixes for that version.
+This buildout automatically includes the correct Hotfixes for the version of Plone you use. E.g. the extends-file for Plone 5.0.6 https://raw.githubusercontent.com/starzel/buildout/5.0.6/linkto/base.cfg pulls in the file https://raw.githubusercontent.com/starzel/buildout/master/linkto/hotfixes/5.0.6.cfg which in turn contains the pinns and eggs for all HotFixes for that version.
 
 By having the hotfixes-files in the master-branch we can easily update Hotfixes for each version without having to move any tags. The same day a Hotfix is published the corresponding extends-files will be updated. You simply have to rerun buildout and restart your site to include them.
 
@@ -438,13 +432,4 @@ Notes
 
 ``local.cfg`` and ``secret.cfg`` must **never** be versioned. The file ``.gitignore`` in this buildout already prevent this.
 
-It might feels weird that ``buildout.cfg`` loads ``local.cfg``, but this avoids some weird behavior of buildouts extends-feature.
-
-
-To have different supervisor-configurations for test-servers by adding a file ``templates/supervisord-test.conf`` and referencing it in local_test.cfg:
-
-.. code-block:: ini
-
-    [supervisor-conf]
-        input= ${buildout:directory}/templates/supervisord-test.conf
-
+It might feel weird that ``buildout.cfg`` loads ``local.cfg``, but this avoids some weird behavior of buildouts extends-feature.
