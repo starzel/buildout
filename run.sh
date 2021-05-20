@@ -26,7 +26,9 @@
 # shell. Most shells offer a command-line option such as -l to make them
 # behave like a login shell, but AFAIK this is not required by POSIX. If you
 # know how to invoke your target system's shell as a login shell, feel free to
-# edit the unit files to do so rather than using ``run.sh``.
+# edit the unit files to do so rather than using ``run.sh``, like so:
+#
+# ExecStart=/bin/sh -l -c "exec /path/to/program arg1 arg2"
 #
 # In general, however, we don't make any assumptions about what system this
 # buildout configuration will be used on. Therefore we can only rely on
@@ -39,7 +41,7 @@
 # executes its first call argument and passes it the remaining arguments in
 # turn. This is what the ExecStart value within a unit file would look like:
 #
-# ExecStart=/path/to/profile.sh /path/to/program arg1 arg2
+# ExecStart=/path/to/run.sh /path/to/program arg1 arg2
 #
 # Note: Mind the exec; it's there to replace the shell by the program rather
 # than having the shell run as the service with the program being its child.
