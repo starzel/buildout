@@ -60,11 +60,11 @@ jobs:
           git config --global user.email "githubaction@github.com"
           git config --global user.name "GitHub Action CI"
 
-      - name: Virtualenv install
-        run: |
-          echo `which python`
-          pip install virtualenv
-          virtualenv -p `which python` .
+      # - name: Virtualenv install
+      #   run: |
+      #     echo `which python`
+      #     pip install virtualenv
+      #     virtualenv -p `which python` .
 
       - name: Install dependencies
         run: |
@@ -76,8 +76,8 @@ jobs:
         run: |
           echo -e "[buildout]\nlogin = admin\npassword = admin" > secret.cfg
           ln -s local_develop.cfg local.cfg
-          bin/buildout -N code-analysis:return-status-codes=True annotate
-          bin/buildout -N code-analysis:return-status-codes=True
+          buildout -N code-analysis:return-status-codes=True annotate
+          buildout -N code-analysis:return-status-codes=True
 
       - name: Create addon and re-run buildout
         run: |
@@ -90,7 +90,7 @@ jobs:
           sed -i "23i \    project.site" buildout.cfg
           sed -i "29i project.site = fs project.site full-path=\${buildout\:directory}/src/project.site" buildout.cfg
           # re-run buildout
-          bin/buildout -N code-analysis:return-status-codes=True
+          buildout -N code-analysis:return-status-codes=True
 
       - name: test
         run: bin/coverage-test
