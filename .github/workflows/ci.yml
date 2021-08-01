@@ -8,7 +8,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [2.7, 3.6, 3.7, 3.8, 3.9]
+        python-version: [2.7, 3.7, 3.8, 3.9]
 
     steps:
       # git checkout
@@ -26,6 +26,9 @@ jobs:
           path: |
             ~/.cache/pip
             ~/buildout-cache
+            ~/eggs
+            ~/downloads
+
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
@@ -46,19 +49,6 @@ jobs:
           echo "python.version = 3.7" >> $HOME/mrbob_answers.txt
           echo "vscode_support = False" >> $HOME/mrbob_answers.txt
 
-      - name: Setup buildout-cache before install
-        run: |
-          mkdir -p $HOME/buildout-cache/{downloads,eggs,extends}
-          mkdir -p $HOME/buildout-cache/{downloads,eggs,extends}
-          mkdir -p $HOME/.buildout
-          echo "[buildout]" > $HOME/.buildout/default.cfg
-          echo "download-cache = $HOME/buildout-cache/downloads" >> $HOME/.buildout/default.cfg
-          echo "eggs-directory = $HOME/buildout-cache/eggs" >> $HOME/.buildout/default.cfg
-          echo "extends-cache = $HOME/buildout-cache/extends" >> $HOME/.buildout/default.cfg
-          echo "abi-tag-eggs = true" >> $HOME/.buildout/default.cfg
-          git config --global user.email "githubaction@github.com"
-          git config --global user.name "GitHub Action CI"
-
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
@@ -69,11 +59,11 @@ jobs:
         run: |
           echo -e "[buildout]\nlogin = admin\npassword = admin" > secret.cfg
           ln -s local_develop.cfg local.cfg
-          buildout -N code-analysis:return-status-codes=True annotate
+          buildout -N buildout:download-cache=downloads code-analysis:return-status-codes=True annotate
 
       - name: Run buildout
         run: |
-          buildout -N code-analysis:return-status-codes=True
+          buildout -N buildout:download-cache=downloads code-analysis:return-status-codes=True
 
       - name: Create addon and re-run buildout
         run: |
@@ -86,7 +76,7 @@ jobs:
           sed -i "23i \    project.site" buildout.cfg
           sed -i "29i project.site = fs project.site full-path=\${buildout\:directory}/src/project.site" buildout.cfg
           # re-run buildout
-          buildout -N code-analysis:return-status-codes=True
+          buildout -N buildout:download-cache=downloads code-analysis:return-status-codes=True
 
       - name: test
         run: bin/coverage-test
