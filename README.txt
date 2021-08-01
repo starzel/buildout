@@ -2,8 +2,8 @@
 The Starzel Buildout
 ====================
 
-.. image:: https://travis-ci.com/starzel/buildout.svg?branch=master
-    :target: https://travis-ci.com/starzel/buildout
+.. image:: https://github.com/starzel/buildout/actions/workflows/ci.yml/badge.svg
+    :target: https://github.com/starzel/buildout/actions/workflows/ci.yml
 
 This is a standard Plone-buildout of the company `Starzel.de <http://www.starzel.de>`_.
 
