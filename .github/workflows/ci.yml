@@ -8,7 +8,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [2.7, 3.7, 3.8, 3.9]
+        python-version: [2.7, 3.6, 3.7, 3.8, 3.9]
 
     steps:
       # git checkout
@@ -30,7 +30,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pip-
 
-      # before install 1
       - name: Prepare mrbob answers
         run: |
           echo "[variables]" > $HOME/mrbob_answers.txt
@@ -47,7 +46,7 @@ jobs:
           echo "python.version = 3.7" >> $HOME/mrbob_answers.txt
           echo "vscode_support = False" >> $HOME/mrbob_answers.txt
 
-      - name: before install
+      - name: Setup buildout-cache before install
         run: |
           mkdir -p $HOME/buildout-cache/{downloads,eggs,extends}
           mkdir -p $HOME/buildout-cache/{downloads,eggs,extends}
@@ -60,23 +59,20 @@ jobs:
           git config --global user.email "githubaction@github.com"
           git config --global user.name "GitHub Action CI"
 
-      # - name: Virtualenv install
-      #   run: |
-      #     echo `which python`
-      #     pip install virtualenv
-      #     virtualenv -p `which python` .
-
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
           pip install mr.bob
           pip install bobtemplates.plone
 
-      - name: Run buildout
+      - name: Prepare and annotate buildout
         run: |
           echo -e "[buildout]\nlogin = admin\npassword = admin" > secret.cfg
           ln -s local_develop.cfg local.cfg
           buildout -N code-analysis:return-status-codes=True annotate
+
+      - name: Run buildout
+        run: |
           buildout -N code-analysis:return-status-codes=True
 
       - name: Create addon and re-run buildout
