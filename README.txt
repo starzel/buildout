@@ -223,6 +223,18 @@ below). Starting, restarting and stopping the site unit will start, restart
 and stop, resp., the zeoserver and zeoclients. The site unit is the only
 systemd unit in the deployment that needs to be enabled or disabled.
 
+A note on security: The site unit may be used either as a system service or as
+a user service. In the former case, you will want to set a service user and
+group lest the service run as root, which it should never do. The unit
+templates use the values of two buildout variables that you need to set in
+your ``local_production.cfg``:
+
+.. code-block::ini
+
+    [buildout]
+    service-user = plone
+    service-group = plone
+
 If you add any zeoclients, also add their partnames to buildout:zeoclients.
 This is a list used in several places, e.g. to populate the dependencies of
 the main systemd service for the site.
