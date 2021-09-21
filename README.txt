@@ -254,7 +254,7 @@ comments within the script for details.
 Activate the systemd services
 +++++++++++++++++++++++++++++
 
-The service units files are generated in ``/etc/`` you can symlink all files to ``~/.config/systemd/user/`` and use ``systemctl --user daemon-reload``. Services can be managed with ``systemctl --user restart www-zeoserver.service``.
+The service units files are generated in ``etc/`` you can symlink all files to ``~/.config/systemd/user/`` and use ``systemctl --user daemon-reload``. Services can be managed with ``systemctl --user restart www-zeoserver.service``.
 
 
 Server stack
