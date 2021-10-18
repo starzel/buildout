@@ -107,6 +107,7 @@ Versions
 
 We support the following versions of Plone:
 
+- `5.2.6 <https://raw.githubusercontent.com/starzel/buildout/5.2.6/linkto/base.cfg>`_ (Python 2 and 3)
 - `5.2.5 <https://raw.githubusercontent.com/starzel/buildout/5.2.5/linkto/base.cfg>`_ (Python 2 and 3)
 - `5.2.4 <https://raw.githubusercontent.com/starzel/buildout/5.2.4/linkto/base.cfg>`_ (Python 2 and 3)
 - `5.2.3 <https://raw.githubusercontent.com/starzel/buildout/5.2.3/linkto/base.cfg>`_ (Python 2 and 3)
