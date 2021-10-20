@@ -71,10 +71,10 @@ jobs:
           pip install tox
           mrbob -O src/project.site --config $HOME/mrbob_answers.txt bobtemplates.plone:addon
           # add that package to buildout.cfg in eggs, testeggs, auto-checkout and [sources]
-          sed -i "15i \    project.site" buildout.cfg
-          sed -i "19i \    project.site [test]" buildout.cfg
-          sed -i "23i \    project.site" buildout.cfg
-          sed -i "29i project.site = fs project.site full-path=\${buildout\:directory}/src/project.site" buildout.cfg
+          sed -i "16i \    project.site" buildout.cfg
+          sed -i "20i \    project.site [test]" buildout.cfg
+          sed -i "24i \    project.site" buildout.cfg
+          sed -i "30i project.site = fs project.site full-path=\${buildout\:directory}/src/project.site" buildout.cfg
           # re-run buildout
           buildout -N buildout:download-cache=downloads code-analysis:return-status-codes=True
 
