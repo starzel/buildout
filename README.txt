@@ -78,16 +78,16 @@ Structure
 ---------
 
 ``buildout.cfg``
-    This contains the project settings (name, addons, checkouts etc.).
-
-``local.cfg``
-    For each environment (development, production, test) there is a separate ``local_*.cfg``-file. You create a *symlink*  called ``local.cfg`` to one of these files depending on your environment. Each of the files includes the remote ``base.cfg`` that is hosted on github like this:
+    This contains the project settings (name, addons, checkouts etc.). It also includes the remote ``base.cfg`` that is hosted on github like this:
 
     .. code-block:: ini
 
         extends = https://raw.githubusercontent.com/starzel/buildout/5.1/linkto/base.cfg
 
     This example refers to the tag 5.1 of this buildout that uses Plone 5.1 To use a different Plone-version simply change that to point to a different tag.
+
+``local.cfg``
+    For each environment (development, production, test) there is a separate ``local_*.cfg``-file. You create a *symlink*  called ``local.cfg`` to one of these files depending on your environment.
 
 ``base.cfg``
     This remote file conatains most of the commonly used logic used for prodcution. It also includes two version-files that are also hosted on github:
