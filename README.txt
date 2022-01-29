@@ -13,7 +13,7 @@ This is a standard Plone-buildout of the company `Starzel.de <http://www.starzel
 Main features
 -------------
 
-* It extends to config- and version-files on github shared by all projects that use the same version of Plone.
+* It extends to config- and version-files on github shared by all projects that use the same version of Plone.
 * It allows to update a project simply by changing the version it extends.
 * It allows to update all projects of one version by changing remote files (very useful for HotFixes).
 * It is minimal work to setup a new project.
