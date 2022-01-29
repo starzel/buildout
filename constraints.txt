@@ -1,4 +1,4 @@
 setuptools==42.0.2
 zc.buildout==2.13.4
 wheel==0.36.2
-regex==2021.3.17 ; python_version < '3.0'
+regex==2021.3.17
