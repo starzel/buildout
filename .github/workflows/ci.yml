@@ -8,7 +8,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.8", "3.9", "3.10"]
+        python-version: ["3.8", "3.9", "3.10", "3.11"]
 
     steps:
       # git checkout
@@ -53,7 +53,7 @@ jobs:
         run: |
           pip install -r requirements.txt
           pip install mr.bob
-          pip install bobtemplates.plone==6.0b12
+          pip install bobtemplates.plone==6.2
 
       - name: Prepare and annotate buildout
         run: |
