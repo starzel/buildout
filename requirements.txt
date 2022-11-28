@@ -1,5 +1,0 @@
--c constraints.txt
-
-pre-commit
-zc.buildout
-wheel

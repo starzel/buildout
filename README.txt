@@ -53,25 +53,18 @@ Symlink to the file that best fits you local environment. At first that is usual
 
     ln -s local_develop.cfg local.cfg
 
-Create a virtualenv in Python 2.7 or Python 3.7 (Plone 5.2 only).
-
-.. code-block:: bash
-
-    virtualenv .  # for Python 2.7
-    python3.7 -m venv .  # for Python 3 (Plone 5.2 only)
-
 Install and configure Plone
 
 .. code-block:: bash
 
-    ./bin/pip install -r requirements.txt
-    ./bin/buildout
+    pipenv install
+    pipenv run buildout
 
 Install git pre-commit hooks
 
 .. code-block:: bash
 
-    ./bin/pre-commit install
+    pipenv run pre-commit install
 
 
 Structure
@@ -196,11 +189,11 @@ Symlink to the development-config:
 
 The development-setup will build a simple instance with some useful tools (see below). The setup assumes that zeo, varnish and loadbalancing are only configured on production.
 
-Install git pre-commit hooks using the pre-commit tool that was installed via requirements.txt:
+Install git pre-commit hooks using the pre-commit tool that was installed via pipenv:
 
 .. code-block:: bash
 
-    ./bin/pre-commit install
+    pipenv run pre-commit install
 
 
 Use in production
