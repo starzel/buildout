@@ -29,7 +29,7 @@ jobs:
             ~/eggs
             ~/downloads
 
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/Pipfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-pip-
 
@@ -51,9 +51,10 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt
-          pip install mr.bob
-          pip install bobtemplates.plone==6.2
+          pip install pipenv
+          pipenv install
+          pipenv install mr.bob
+          pipenv install bobtemplates.plone==6.2
 
       - name: Prepare and annotate buildout
         run: |
@@ -68,7 +69,7 @@ jobs:
       - name: Create addon and re-run buildout
         run: |
           mkdir src
-          pip install tox
+          pipenv install tox
           mrbob -O src/project.site --config $HOME/mrbob_answers.txt bobtemplates.plone:addon
           # add that package to buildout.cfg in eggs, testeggs, auto-checkout and [sources]
           sed -i "16i \    project.site" buildout.cfg
