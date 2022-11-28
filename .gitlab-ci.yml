@@ -1,13 +1,12 @@
 before_script:
     - echo -e "[buildout]\nlogin = admin\npassword = admin" > secret.cfg
     - ln -fs local_ci.cfg local.cfg
-    - python3 -m venv .
-    - ./bin/pip install -r requirements.txt
+    - pipenv install
     - ./bin/develop up -f || true
     - ./bin/buildout -t 3 || ./bin/buildout -v
 
 job1:
   script:
     - export DISPLAY=:99
-    - ./bin/pre-commit run -a
+    - pipenv run pre-commit run -a
     - ./bin/test

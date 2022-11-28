@@ -1,0 +1,14 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+setuptools = "==65.5.1"
+wheel = "==0.38.4"
+"zc.buildout" = "==3.0.1"
+
+[dev-packages]
+
+[requires]
+python_version = "3.11"

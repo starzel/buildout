@@ -1,5 +1,10 @@
 Changes
 
+Unreleased
+==========
+
+- Use pipenv
+
 3.5
 ===
 - Remove temporarystorage for Plone 6.0 (local_coredev.cfg)
