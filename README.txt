@@ -53,12 +53,11 @@ Symlink to the file that best fits you local environment. At first that is usual
 
     ln -s local_develop.cfg local.cfg
 
-Create a virtualenv in Python 2.7 or Python 3.7 (Plone 5.2 only).
+Create a virtualenv:
 
 .. code-block:: bash
 
-    virtualenv .  # for Python 2.7
-    python3.7 -m venv .  # for Python 3 (Plone 5.2 only)
+    python3.11 -m venv .
 
 Install and configure Plone
 
@@ -107,18 +106,10 @@ Versions
 
 We support the following versions of Plone:
 
+- `6.0.1 <https://raw.githubusercontent.com/starzel/buildout/6.0.1/linkto/base.cfg>`_ (Python 3)
 - `6.0.0.2 <https://raw.githubusercontent.com/starzel/buildout/6.0.0.2/linkto/base.cfg>`_ (Python 3) (sorry, no 6.0.0.1)
 - `6.0.0 <https://raw.githubusercontent.com/starzel/buildout/6.0.0/linkto/base.cfg>`_ (Python 3)
-- `6.0.0rc2 <https://raw.githubusercontent.com/starzel/buildout/6.0.0rc2/linkto/base.cfg>`_ (Python 3)
-- `6.0.0rc1 <https://raw.githubusercontent.com/starzel/buildout/6.0.0rc1/linkto/base.cfg>`_ (Python 3)
-- `6.0.0b3 <https://raw.githubusercontent.com/starzel/buildout/6.0.0b3/linkto/base.cfg>`_ (Python 3)
-- `6.0.0b2 <https://raw.githubusercontent.com/starzel/buildout/6.0.0b2/linkto/base.cfg>`_ (Python 3)
-- `6.0.0b1 <https://raw.githubusercontent.com/starzel/buildout/6.0.0b1/linkto/base.cfg>`_ (Python 3)
-- `6.0.0a6 <https://raw.githubusercontent.com/starzel/buildout/6.0.0a6/linkto/base.cfg>`_ (Python 3)
-- `6.0.0a4 <https://raw.githubusercontent.com/starzel/buildout/6.0.0a4/linkto/base.cfg>`_ (Python 3)
-- `6.0.0a3 <https://raw.githubusercontent.com/starzel/buildout/6.0.0a3/linkto/base.cfg>`_ (Python 3)
-- `6.0.0a2 <https://raw.githubusercontent.com/starzel/buildout/6.0.0a2/linkto/base.cfg>`_ (Python 3)
-- `6.0.0a1 <https://raw.githubusercontent.com/starzel/buildout/6.0.0a2/linkto/base.cfg>`_ (Python 3)
+- `5.2.11 <https://raw.githubusercontent.com/starzel/buildout/5.2.11/linkto/base.cfg>`_ (Python 2 and 3)
 - `5.2.10 <https://raw.githubusercontent.com/starzel/buildout/5.2.10/linkto/base.cfg>`_ (Python 2 and 3)
 - `5.2.9 <https://raw.githubusercontent.com/starzel/buildout/5.2.9/linkto/base.cfg>`_ (Python 2 and 3)
 - `5.2.8 <https://raw.githubusercontent.com/starzel/buildout/5.2.8/linkto/base.cfg>`_ (Python 2 and 3)
