@@ -107,11 +107,10 @@ Versions
 
 We support the following versions of Plone:
 
-- `6.0.0a6 <https://raw.githubusercontent.com/starzel/buildout/6.0.0a6/linkto/base.cfg>`_ (Python 3)
-- `6.0.0a4 <https://raw.githubusercontent.com/starzel/buildout/6.0.0a4/linkto/base.cfg>`_ (Python 3)
-- `6.0.0a3 <https://raw.githubusercontent.com/starzel/buildout/6.0.0a3/linkto/base.cfg>`_ (Python 3)
-- `6.0.0a2 <https://raw.githubusercontent.com/starzel/buildout/6.0.0a2/linkto/base.cfg>`_ (Python 3)
-- `6.0.0a1 <https://raw.githubusercontent.com/starzel/buildout/6.0.0a1/linkto/base.cfg>`_ (Python 3)
+- `6.0.1 <https://raw.githubusercontent.com/starzel/buildout/6.0.1/linkto/base.cfg>`_ (Python 3)
+- `6.0.0.2 <https://raw.githubusercontent.com/starzel/buildout/6.0.0.2/linkto/base.cfg>`_ (Python 3) (sorry, no 6.0.0.1)
+- `6.0.0 <https://raw.githubusercontent.com/starzel/buildout/6.0.0/linkto/base.cfg>`_ (Python 3)
+- `5.2.11 <https://raw.githubusercontent.com/starzel/buildout/5.2.11/linkto/base.cfg>`_ (Python 2 and 3)
 - `5.2.10 <https://raw.githubusercontent.com/starzel/buildout/5.2.10/linkto/base.cfg>`_ (Python 2 and 3)
 - `5.2.9 <https://raw.githubusercontent.com/starzel/buildout/5.2.9/linkto/base.cfg>`_ (Python 2 and 3)
 - `5.2.8 <https://raw.githubusercontent.com/starzel/buildout/5.2.8/linkto/base.cfg>`_ (Python 2 and 3)
