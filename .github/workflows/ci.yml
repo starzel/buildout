@@ -8,7 +8,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.8", "3.9", "3.10", "3.11"]
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
 
     steps:
       # git checkout
@@ -46,13 +46,13 @@ jobs:
           echo "author.email = bauer@starzel.de" >> $HOME/mrbob_answers.txt
           echo "author.github.user = pbauer" >> $HOME/mrbob_answers.txt
           echo "plone.version = 6.0" >> $HOME/mrbob_answers.txt
-          echo "python.version = 3.11" >> $HOME/mrbob_answers.txt
+          echo "python.version = 3.12" >> $HOME/mrbob_answers.txt
           echo "vscode_support = False" >> $HOME/mrbob_answers.txt
 
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
-          pip install mr.bob
+          pip install mr.bob==1.0.1
           pip install bobtemplates.plone==6.3.1
 
       - name: Prepare and annotate buildout
@@ -71,10 +71,8 @@ jobs:
           pip install tox
           mrbob -O src/project.site --config $HOME/mrbob_answers.txt bobtemplates.plone:addon
           # add that package to buildout.cfg in eggs, testeggs, auto-checkout and [sources]
-          sed -i "16i \    project.site" buildout.cfg
-          sed -i "20i \    project.site [test]" buildout.cfg
-          sed -i "24i \    project.site" buildout.cfg
-          sed -i "30i project.site = fs project.site full-path=\${buildout\:directory}/src/project.site" buildout.cfg
+          sed -i'' -e 's/#    project.site/    project.site/g' buildout.cfg
+          sed -i'' -e 's/# project.site =/project.site =/g' buildout.cfg
           # re-run buildout
           buildout -N buildout:download-cache=downloads code-analysis:return-status-codes=True
 
