@@ -81,9 +81,9 @@ Structure
 
     .. code-block:: ini
 
-        extends = https://raw.githubusercontent.com/starzel/buildout/6.0.5/linkto/base.cfg
+        extends = https://raw.githubusercontent.com/starzel/buildout/6.0.11/linkto/base.cfg
 
-    This example refers to the tag 6.0.5 of this buildout that uses Plone 6.0.5 To use a different Plone-version simply change that to point to a different tag.
+    This example refers to the tag 6.0.11 of this buildout that uses Plone 6.0.11 To use a different Plone-version simply change that to point to a different tag.
 
 ``local.cfg``
     For each environment (development, production, test) there is a separate ``local_*.cfg``-file. You create a *symlink*  called ``local.cfg`` to one of these files depending on your environment.
@@ -91,8 +91,8 @@ Structure
 ``base.cfg``
     This remote file conatains most of the commonly used logic used for prodcution. It also includes two version-files that are also hosted on github:
 
-    * `pinned_versions.cfg <https://raw.githubusercontent.com/starzel/buildout/6.0.5/linkto/pinned_versions.cfg>`_: Pinns the Plone-version using http://dist.plone.org/release/6.0.5/versions.cfg
-    * `floating_versions.cfg <https://raw.githubusercontent.com/starzel/buildout/6.0.5/linkto/floating_versions.cfg>`_: Pinns all commonly used addons of this buildout.
+    * `pinned_versions.cfg <https://raw.githubusercontent.com/starzel/buildout/6.0.11/linkto/pinned_versions.cfg>`_: Pinns the Plone-version using http://dist.plone.org/release/6.0.11/versions.cfg
+    * `floating_versions.cfg <https://raw.githubusercontent.com/starzel/buildout/6.0.11/linkto/floating_versions.cfg>`_: Pinns all commonly used addons of this buildout.
 
 ``pinned_versions_project.cfg``
     Here you pinn versions to overwrite or extend the hosted ``pinned_versions.cfg``. These eggs are usually pinned for a reason and are usually not safe to be upgraded.
@@ -106,6 +106,7 @@ Versions
 
 We support the following versions of Plone:
 
+- `6.0.11 <https://raw.githubusercontent.com/starzel/buildout/6.0.10.1/linkto/base.cfg>`_ (Python 3)
 - `6.0.10.1 <https://raw.githubusercontent.com/starzel/buildout/6.0.10.1/linkto/base.cfg>`_ (Python 3)
 - `6.0.10 <https://raw.githubusercontent.com/starzel/buildout/6.0.10/linkto/base.cfg>`_ (Python 3)
 - `6.0.9 <https://raw.githubusercontent.com/starzel/buildout/6.0.9/linkto/base.cfg>`_ (Python 3)
