@@ -1,7 +1,7 @@
 # Same as https://dist.plone.org/release/6.1.4/requirements.txt
 # but newer versions
 packaging==25.0
-pip==25.3
+pip==26.0.1
 setuptools==80.9.0
 wheel==0.45.1
 zc.buildout==5.1.1
