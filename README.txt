@@ -418,9 +418,6 @@ stacktrace
 pre-commit
     This installs a pre-commit-hook that runs several code analysis tests including black.
 
-mrbob
-    This part adds `bobtemplates.plone <https://github.com/collective/bobtemplates.plone>`_ to simplify the creation of new addons.
-
 test
     Run tests for your test-eggs
 
