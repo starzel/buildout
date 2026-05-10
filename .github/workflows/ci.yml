@@ -33,6 +33,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pip-
 
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
       - name: Prepare and annotate buildout
         run: |
           echo -e "[buildout]\nlogin = admin\npassword = admin" > secret.cfg
